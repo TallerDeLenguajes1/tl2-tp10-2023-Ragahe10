@@ -1,4 +1,4 @@
-namespace tl2_tp09_2023_Ragahe10;
+namespace tl2_tp10_2023_Ragahe10;
 
 public interface ITableroRepository {
     public void AddTablero(Tablero tablero);

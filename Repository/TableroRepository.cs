@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SQLite;
-namespace tl2_tp09_2023_Ragahe10;
+namespace tl2_tp10_2023_Ragahe10;
 
 
 public class TableroRepository : ITableroRepository {

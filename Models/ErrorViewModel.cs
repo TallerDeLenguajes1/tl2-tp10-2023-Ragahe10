@@ -1,4 +1,4 @@
-namespace tl2_tp10_2023_Ragahe10.Models;
+namespace tl2_tp10_2023_Ragahe10;
 
 public class ErrorViewModel
 {
