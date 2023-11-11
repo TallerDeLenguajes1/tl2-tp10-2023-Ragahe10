@@ -28,7 +28,7 @@ public class TareaController : Controller
         return View(new Tarea());
     }
     [HttpPost]
-    public IActionResult CrearTablero(Tarea tarea)
+    public IActionResult CrearTarea(Tarea tarea)
     {
         tareaRepository.AddTarea(tarea);
         return RedirectToAction("Index");

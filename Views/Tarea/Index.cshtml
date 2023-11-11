@@ -1,17 +1,20 @@
 ﻿@{
-    ViewData["Title"] = "Tablero";    
+    ViewData["Title"] = "Tarea";    
 }
-@model List<Tablero>
+@model List<Tarea>
 
 <div class="text-center">
-    <h1 class="display-4">Tableros</h1>
+    <h1 class="display-4">Tareas</h1>
     <table class="table caption-top">
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">ID Propietario</th>
+                <th scope="col">ID Tablero</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Descrpcion</th>
+                <th scope="col">Color</th>
+                <th scope="col">Estado</th>
+                <th scope="col">ID Usuario Asignado</th>
                 <th scope="col">Modificar</th>
                 <th scope="col">Borrar</th>
             </tr>
@@ -20,10 +23,15 @@
             @foreach(var t in Model){
                 <tr>
                     <th class="m-auto" scope="row">@t.Id</th>
-                    <th class="m-auto" scope="row">@t.IdUsuarioPropietario</th>
+                    <th class="m-auto" scope="row">@t.IdTablero</th>
                     <td class="m-auto col">@t.Nombre</td>
-                    <td class="m-auto col-6">@t.Descripcion</td>
-                    <td><a class="btn  btn-outline-primary" asp-controller="Tablero" asp-action="ModificarTablero" asp-route-id="@t.Id"><i class="bi bi-pencil-square"></i></a></td>
+                    <td class="m-auto col-4">@t.Descripcion</td>
+                    <td class="m-auto col">
+                        <input type="color" asp-for="@t.Color" name="colorInput" value="@t.Color" disabled>
+                    </td>
+                    <td class="m-auto col">@t.Estado</td>
+                    <th class="m-auto" scope="row">@t.IdUsuarioAsignado</th>
+                    <td><a class="btn  btn-outline-primary" asp-controller="Tarea" asp-action="ModificarTarea" asp-route-id="@t.Id"><i class="bi bi-pencil-square"></i></a></td>
                     <td>
                         @* <a class="btn  btn-outline-danger" asp-controller="Tablero" asp-action="EliminarTablero" asp-route-idTablero="@u.Id" onclick="return confirm('¿Estas seguro que quieres eliminar a @u.NombreDeTablero?')"><i class="bi bi-trash"></i></a> *@
 
@@ -37,7 +45,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel-@t.Id">Eliminar Usuario</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel-@t.Id">Eliminar Tarea</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -46,7 +54,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <a class="btn  btn-outline-danger" asp-controller="Tablero" asp-action="EliminarTablero" asp-route-id="@t.Id">Confirmar</a>
+                                        <a class="btn  btn-outline-danger" asp-controller="Tarea" asp-action="EliminarTarea" asp-route-id="@t.Id">Confirmar</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,5 +64,5 @@
             }
         </tbody>
     </table>
-    <a class="btn btn-outline-success fs-5 py-2 px-4" asp-area="" asp-controller="Tablero" asp-action="CrearTablero"><i class="bi bi-plus-lg"></i> Crear Tablero</a>
+    <a class="btn btn-outline-success fs-5 py-2 px-4" asp-area="" asp-controller="Tarea" asp-action="CrearTarea"><i class="bi bi-plus-lg"></i> Agregar Tarea</a>
 </div>

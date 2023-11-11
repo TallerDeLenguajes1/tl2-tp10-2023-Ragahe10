@@ -4,15 +4,15 @@
 @model Usuario
 
 <div class="text-center d-flex flex-column align-items-center">
-    <h1 class="text-primary">Crear Usuario</h1>
-    <form class="w-50 my-2 p-4 border border-3 border-primary rounded-2 border-opacity-25" asp-controller="Usuario" asp-action="CrearUsuario">
+    <h1 class="text-success">Crear Usuario</h1>
+    <form class="w-50 my-2 p-4 border border-3 border-success rounded-2 border-opacity-25" asp-controller="Usuario" asp-action="CrearUsuario">
         <fieldset>
             <div class="mb-3 form-floating">
                 <input type="text" class="form-control" asp-for="@Model.NombreDeUsuario" aria-describedby="emailHelp" placeholder="Nombre de usuario" required>
                 <label asp-for="@Model.NombreDeUsuario" class="form-label text-center">Nombre de Usuario</label>
                 <div id="emailHelp" class="form-text">Un nombre bonito para alguin bonito.</div>
             </div>
-            <button type="submit" class="btn  btn-outline-primary">Submit</button>
+            <button type="submit" class="btn  btn-outline-success">Submit</button>
         </fieldset>
     </form>
 </div>
