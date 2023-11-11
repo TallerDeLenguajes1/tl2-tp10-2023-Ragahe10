@@ -48,7 +48,7 @@ public class UsuarioController : Controller
     public IActionResult EliminarUsuario(int idUsuario)
     {
         usuarioRepository.DeleteUsuario(idUsuario);
-        return RedirectToAction("index");
+        return RedirectToAction("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
