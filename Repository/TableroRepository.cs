@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SQLite;
-namespace tl2_tp10_2023_Ragahe10;
+namespace tl2_tp10_2023_Ragahe10.Models;
 
 
 public class TableroRepository : ITableroRepository {
@@ -21,10 +21,10 @@ public class TableroRepository : ITableroRepository {
         }
 
     }
-    public void UpdateUsuario(int idTablero, Tablero tablero){
+    public void UpdateTablero(int idTablero, Tablero tablero){
         using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = @"UPDATE Tablero SET id_usuario_propietario = @idUsuario, nombre = @nombre, descripcion = @descripcion WHERE id_tablero = @idTablero;";
+            command.CommandText = @"UPDATE Tablero SET id_usuario_propietario = @IdUsuario, nombre = @nombre, descripcion = @descripcion WHERE id_tablero = @idTablero;";
             command.Parameters.Add(new SQLiteParameter("@IdUsuario", tablero.IdUsuarioPropietario));
             command.Parameters.Add(new SQLiteParameter("@nombre", tablero.Nombre));
             command.Parameters.Add(new SQLiteParameter("@descripcion", tablero.Descripcion));

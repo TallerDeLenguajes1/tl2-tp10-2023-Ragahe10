@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using tl2_tp10_2023_Ragahe10;
+using tl2_tp10_2023_Ragahe10.Models;
 
 namespace tl2_tp10_2023_Ragahe10.Controllers;
 

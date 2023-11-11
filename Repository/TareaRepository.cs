@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Data.SqlClient;
-namespace tl2_tp10_2023_Ragahe10;
+namespace tl2_tp10_2023_Ragahe10.Models;
 public class TareaRepository : ITareaRepository{
     private string cadenaConexion = "Data Source=DataBase/kanban.db;Cache=Shared";
     public void AddTarea(Tarea tarea){

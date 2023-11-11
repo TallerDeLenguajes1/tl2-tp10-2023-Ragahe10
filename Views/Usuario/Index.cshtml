@@ -1,10 +1,56 @@
-﻿@model List<Usuario>
-@{
+﻿@{
     ViewData["Title"] = "Usuario";    
 }
+@model List<Usuario>
 
 <div class="text-center">
-    <h1 class="display-4">Usuarios</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    
+    <h1 class="display-4">Lista de usuarios</h1>
+    <table class="table caption-top">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Modificar</th>
+                <th scope="col">Borrar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var u in Model){
+                <tr>
+                    <th class="m-auto" scope="row">@u.Id</th>
+                    <td class="m-auto col-8">@u.NombreDeUsuario</td>
+                    <td><a class="btn  btn-outline-primary" asp-controller="Usuario" asp-action="ModificarUsuario" asp-route-id="@u.Id"><i class="bi bi-pencil-square"></i></a></td>
+                    <td>
+                        @* <a class="btn  btn-outline-danger" asp-controller="Usuario" asp-action="EliminarUsuario" asp-route-idUsuario="@u.Id" onclick="return confirm('¿Estas seguro que quieres eliminar a @u.NombreDeUsuario?')"><i class="bi bi-trash"></i></a> *@
+
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@u.Id">
+                            <i class="bi bi-trash"></i>
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal-@u.Id" tabindex="-1" aria-labelledby="exampleModalLabel-@u.Id"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel-@u.Id">Eliminar Usuario</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>¿Desea eliminar a @u.NombreDeUsuario?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <a class="btn  btn-outline-danger" asp-controller="Usuario" asp-action="EliminarUsuario" asp-route-idUsuario="@u.Id">Confirmar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-outline-success fs-5 py-2 px-4" asp-area="" asp-controller="Usuario" asp-action="CrearUsuario"><i class="bi bi-plus-lg"></i> Cargar Usuario</a>
 </div>

@@ -1,4 +1,4 @@
-namespace tl2_tp10_2023_Ragahe10;
+namespace tl2_tp10_2023_Ragahe10.Models;
 public class Tablero{
     private int id;
     private int idUsuarioPropietario;

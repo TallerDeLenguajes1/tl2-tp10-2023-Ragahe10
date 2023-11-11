@@ -1,4 +1,4 @@
-namespace tl2_tp10_2023_Ragahe10;
+namespace tl2_tp10_2023_Ragahe10.Models;
 
 public interface IUsuarioRepository {
     public void AddUsuario(Usuario usuario);
