@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9LwwDTbOz5ip/ZyuBH9ulXUkt3mWK4jb4HBy7o9gVkc=",
+  "Hash": "iKiKxayRD9vwLvRWemnBcWmxI/scFj1Vbew2NG2neCo=",
   "Source": "tl2-tp10-2023-Ragahe10",
   "BasePath": "_content/tl2-tp10-2023-Ragahe10",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\img\\logo.png",
+      "SourceId": "tl2-tp10-2023-Ragahe10",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\",
+      "BasePath": "_content/tl2-tp10-2023-Ragahe10",
+      "RelativePath": "img/logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\logo.png"
     },
     {
       "Identity": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\img\\ramiro.jpg",
