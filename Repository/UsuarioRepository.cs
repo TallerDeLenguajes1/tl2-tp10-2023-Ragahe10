@@ -9,11 +9,13 @@ namespace tl2_tp10_2023_Ragahe10.Models;
 public class UsuarioRepository : IUsuarioRepository {
     private string cadenaConexion = "Data Source=DataBase/kanban.db;Cache=Shared";
     public void AddUsuario(Usuario usuario){
-        var query = @"INSERT INTO Usuario (nombre_de_usuario) VALUES (@nombre_de_usuario);";
+        var query = @"INSERT INTO Usuario (nombre_de_usuario,rol,pass) VALUES (@nombre_de_usuario,@rol,@pass);";
         using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
             connection.Open();
             var command = new SQLiteCommand(query,connection);
             command.Parameters.Add(new SQLiteParameter("@nombre_de_usuario", usuario.NombreDeUsuario));
+            command.Parameters.Add(new SQLiteParameter("@rol", usuario.Rol));
+            command.Parameters.Add(new SQLiteParameter("@pass", usuario.Pass));
             command.ExecuteNonQuery();
             connection.Close();
         }
@@ -21,8 +23,10 @@ public class UsuarioRepository : IUsuarioRepository {
     public void UpdateUsuario(int idUsuario, Usuario usuario){
         using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = @"UPDATE Usuario SET nombre_de_usuario = @nombre WHERE id = @idUsuario;";
+            command.CommandText = @"UPDATE Usuario SET nombre_de_usuario = @nombre, pass = @pass, rol = @rol WHERE id = @idUsuario;";
             command.Parameters.Add(new SQLiteParameter("@nombre",usuario.NombreDeUsuario));
+            command.Parameters.Add(new SQLiteParameter("@pass",usuario.Pass));
+            command.Parameters.Add(new SQLiteParameter("@rol",usuario.Rol));
             command.Parameters.Add(new SQLiteParameter("@idUsuario",idUsuario));
             connection.Open();
             command.ExecuteNonQuery();
@@ -40,6 +44,8 @@ public class UsuarioRepository : IUsuarioRepository {
                     var usuario = new Usuario();
                     usuario.Id = Convert.ToInt32(reader["id"]);
                     usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
+                    usuario.Rol = reader["rol"].ToString();
+                    usuario.Pass = reader["pass"].ToString();
                     usuarios.Add(usuario);
                 }
             }

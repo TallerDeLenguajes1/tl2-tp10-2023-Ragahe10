@@ -10,6 +10,8 @@
             <tr class="table-dark">
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Contraseña</th>
                 <th scope="col">Modificar</th>
                 <th scope="col">Borrar</th>
             </tr>
@@ -18,7 +20,10 @@
             @foreach(var u in Model){
                 <tr>
                     <th class="m-auto" scope="row">@u.Id</th>
-                    <td class="m-auto col-8">@u.NombreDeUsuario</td>
+                    <td class="m-auto col-4">@u.NombreDeUsuario</td>
+                    <td class="m-auto">@u.Rol</td>
+                    <td class="m-auto">@u.Pass</td>
+                    @* <td class="m-auto"><input type="password" asp-for="@u.Pass" value="@u.Pass"></td> *@
                     <td><a class="btn  btn-outline-primary" asp-controller="Usuario" asp-action="ModificarUsuario" asp-route-id="@u.Id"><i class="bi bi-pencil-square"></i></a></td>
                     <td>
                         @* <a class="btn  btn-outline-danger" asp-controller="Usuario" asp-action="EliminarUsuario" asp-route-idUsuario="@u.Id" onclick="return confirm('¿Estas seguro que quieres eliminar a @u.NombreDeUsuario?')"><i class="bi bi-trash"></i></a> *@
