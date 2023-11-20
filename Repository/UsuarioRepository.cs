@@ -7,6 +7,7 @@ namespace tl2_tp10_2023_Ragahe10.Models;
 
 
 public class UsuarioRepository : IUsuarioRepository {
+    private string[] roles = {"Administrador", "Operador"};
     private string cadenaConexion = "Data Source=DataBase/kanban.db;Cache=Shared";
     public void AddUsuario(Usuario usuario){
         var query = @"INSERT INTO Usuario (nombre_de_usuario,rol,pass) VALUES (@nombre_de_usuario,@rol,@pass);";
@@ -14,7 +15,11 @@ public class UsuarioRepository : IUsuarioRepository {
             connection.Open();
             var command = new SQLiteCommand(query,connection);
             command.Parameters.Add(new SQLiteParameter("@nombre_de_usuario", usuario.NombreDeUsuario));
-            command.Parameters.Add(new SQLiteParameter("@rol", usuario.Rol));
+            if(roles.FirstOrDefault(r => r==usuario.Rol)!=null){
+                command.Parameters.Add(new SQLiteParameter("@rol", usuario.Rol));
+            }else{
+                command.Parameters.Add(new SQLiteParameter("@rol","Operador"));
+            }
             command.Parameters.Add(new SQLiteParameter("@pass", usuario.Pass));
             command.ExecuteNonQuery();
             connection.Close();
@@ -26,7 +31,11 @@ public class UsuarioRepository : IUsuarioRepository {
             command.CommandText = @"UPDATE Usuario SET nombre_de_usuario = @nombre, pass = @pass, rol = @rol WHERE id = @idUsuario;";
             command.Parameters.Add(new SQLiteParameter("@nombre",usuario.NombreDeUsuario));
             command.Parameters.Add(new SQLiteParameter("@pass",usuario.Pass));
-            command.Parameters.Add(new SQLiteParameter("@rol",usuario.Rol));
+            if(roles.FirstOrDefault(r=> r==usuario.Rol)!=null){
+                command.Parameters.Add(new SQLiteParameter("@rol", usuario.Rol));
+            }else{
+                command.Parameters.Add(new SQLiteParameter("@rol","Operador"));
+            }
             command.Parameters.Add(new SQLiteParameter("@idUsuario",idUsuario));
             connection.Open();
             command.ExecuteNonQuery();

@@ -33,8 +33,8 @@
             </div>
             <div class="mb-3">
                 <label asp-for="@Model.Color">Color:</label>
-                <input type="color" id="Color" name="Color" value="#ff0000" onchange="GuardarColor()">
-                <input type="text" id="stringColor" name="Color" readonly hidden>
+                <input type="color" class="form-control" id="Color" name="Color" value="#ff0000" onchange="GuardarColor()">
+                <input type="text" class="form-control" id="stringColor" name="Color" readonly hidden>
             </div>
             <button type="submit" class="btn  btn-outline-success">Enviar</button>
         </fieldset>

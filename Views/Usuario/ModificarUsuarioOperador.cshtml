@@ -1,12 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Usuario";    
+    ViewData["Title"] = "Modificar Usuario";    
 }
 @model Usuario
 
 <div class="text-center d-flex flex-column align-items-center">
-    <h1 class="text-success">Crear Usuario</h1>
-    <form class="w-50 my-2 p-4 border border-3 border-success rounded-2 border-opacity-25" asp-controller="Usuario" asp-action="CrearUsuario">
+    <h1 class="text-primary">Modificar Usuario</h1>
+    <form class="w-50 my-2 p-4 border border-3 border-primary rounded-2 border-opacity-25" asp-controller="Usuario" asp-action="ModificarUsuario">
+        <legend>@Model.Id - @Model.NombreDeUsuario</legend>
         <fieldset>
+            <input hidden asp-for="@Model.Id">
             <div class="mb-3 form-floating">
                 <div class="mb-3 form-floating">
                     <input type="text" class="form-control" asp-for="@Model.NombreDeUsuario" aria-describedby="emailHelp" placeholder="Nombre de usuario" required>
@@ -18,13 +20,13 @@
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.Rol" class="form-label text-center">Rol</label>
-                    <select asp-for="@Model.Rol" class="form-select" aria-label="Default select example">
-                        <option value="Operador" selected>Operador</option>
+                    <select asp-for="@Model.Rol" class="form-select" aria-label="Default select example" disabled>
+                        <option value="Operador">Operador</option>
                         <option value="Administrador">Administrador</option>
                     </select>
                 </div>
             </div>
-            <button type="submit" class="btn  btn-outline-success">Submit</button>
+            <button type="submit" class="btn  btn-outline-primary">Cargar</button>
         </fieldset>
     </form>
 </div>

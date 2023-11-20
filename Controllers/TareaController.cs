@@ -56,4 +56,10 @@ public class TareaController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    private bool isAdmin(){
+        if(HttpContext.Session != null && HttpContext.Session.GetString("rol") == "Administrador"){
+            return true;
+        }
+        return false;
+    }
 }

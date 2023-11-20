@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>tl2_tp10_2023_Ragahe10</RootNamespace>
   </PropertyGroup>
+
    <ItemGroup>
     <None Update="DataBase\kanban.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
