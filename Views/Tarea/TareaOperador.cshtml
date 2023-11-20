@@ -16,7 +16,7 @@
                 <th scope="col">Estado</th>
                 <th scope="col">Usuario Asignado</th>
                 <th scope="col">Modificar</th>
-                <th scope="col">Borrar</th>
+                @* <th scope="col">Borrar</th> *@
             </tr>
         </thead>
         <tbody>
@@ -35,12 +35,12 @@
                     <td>
                         @* <a class="btn  btn-outline-danger" asp-controller="Tablero" asp-action="EliminarTablero" asp-route-idTablero="@u.Id" onclick="return confirm('¿Estas seguro que quieres eliminar a @u.NombreDeTablero?')"><i class="bi bi-trash"></i></a> *@
 
-                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@t.Id">
+                        @* <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@t.Id">
                             <i class="bi bi-trash"></i>
-                        </button>
+                        </button> *@
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal-@t.Id" tabindex="-1" aria-labelledby="exampleModalLabel-@t.Id"
+                        @* <div class="modal fade" id="exampleModal-@t.Id" tabindex="-1" aria-labelledby="exampleModalLabel-@t.Id"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                         </div>
-                    </td>
+                    </td> *@
                 </tr>
             }
         </tbody>
