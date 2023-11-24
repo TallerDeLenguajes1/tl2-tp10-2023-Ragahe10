@@ -7,19 +7,37 @@ public enum EstadoTarea{
     Done
 }
 public class Tarea{
-    private int id;
-    private int idTablero;
-    private string nombre;
-    private string descripcion;
-    private string color;
-    private EstadoTarea estado;
-    private int idUsuarioAsignado;
+    public Tarea()
+    {
+    }
 
-    public int Id { get => id; set => id = value; }
-    public int IdTablero { get => idTablero; set => idTablero = value; }
-    public string Nombre { get => nombre; set => nombre = value; }
-    public string Descripcion { get => descripcion; set => descripcion = value; }
-    public string Color { get => color; set => color = value; }
-    public EstadoTarea Estado { get => estado; set => estado = value; }
-    public int IdUsuarioAsignado { get => idUsuarioAsignado; set => idUsuarioAsignado = value; }
+    public Tarea(ViewTareaAdd t)
+    {
+        Id = 0;
+        IdTablero = t.IdTablero;
+        Nombre = t.Nombre;
+        Descripcion = t.Descripcion;
+        Color = t.Color;
+        Estado = t.Estado;
+        IdUsuarioAsignado = t.IdUsuarioAsignado;
+    }
+    public Tarea(ViewTareaUpdate t)
+    {
+        Id = t.Id;
+        IdTablero = t.IdTablero;
+        Nombre = t.Nombre;
+        Descripcion = t.Descripcion;
+        Color = t.Color;
+        Estado = t.Estado;
+        IdUsuarioAsignado = t.IdUsuarioAsignado;
+    }
+
+    public int Id {get;set;}
+    public int IdTablero {get;set;}
+    public string Nombre {get;set;}
+    public string Descripcion {get;set;}
+    public string Color {get;set;}
+    public EstadoTarea Estado {get;set;}
+    public int IdUsuarioAsignado {get;set;}
+    
 }

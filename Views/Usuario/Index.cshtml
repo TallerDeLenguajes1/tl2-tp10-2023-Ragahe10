@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Usuario";    
 }
-@model List<Usuario>
+@model ViewUsuarioListado
 
 <div class="text-center">
     <h1 class="display-4">Lista de usuarios</h1>
@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var u in Model){
+            @foreach(var u in Model.ViewUsuarios){
                 <tr>
                     <th class="m-auto" scope="row">@u.Id</th>
                     <td class="m-auto col-4">@u.NombreDeUsuario</td>

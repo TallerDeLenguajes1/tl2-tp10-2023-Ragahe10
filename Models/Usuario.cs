@@ -6,6 +6,23 @@ public class Usuario{
     private string rol;
     private string pass;
 
+    public Usuario(ViewUsuarioAdd viewUsuarioAdd)
+    {
+        id = viewUsuarioAdd.Id;
+        nombreDeUsuario = viewUsuarioAdd.NombreDeUsuario;
+        rol = viewUsuarioAdd.Rol;
+        pass = viewUsuarioAdd.Pass;
+
+    }
+    public Usuario(ViewUsuarioUpdate viewUsuarioUpdate)
+    {
+        id = viewUsuarioUpdate.Id;
+        nombreDeUsuario = viewUsuarioUpdate.NombreDeUsuario;
+        rol = viewUsuarioUpdate.Rol;
+        pass = viewUsuarioUpdate.Pass;
+
+    }
+
     public int Id { get => id; set => id = value; }
     public string NombreDeUsuario { get => nombreDeUsuario; set => nombreDeUsuario = value; }
     public string Rol { get => rol; set => rol = value; }

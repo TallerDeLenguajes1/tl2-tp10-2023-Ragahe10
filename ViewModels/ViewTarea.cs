@@ -48,22 +48,3 @@ public class ViewListarTareas{
         }
     }
 }
-public class ViewTareaInfo{
-    private Tarea tarea;
-    private List<Tablero> tableros;
-    private List<Usuario> usuarios;
-
-    public ViewTareaInfo()
-    {
-    }
-
-    public ViewTareaInfo(Tarea tarea, List<Tablero> tableros, List<Usuario> usuarios){
-        this.tarea = tarea;
-        this.tableros = tableros;
-        this.usuarios = usuarios;
-    }
-
-    public Tarea Tarea { get => tarea; set => tarea = value; }
-    public List<Tablero> Tableros { get => tableros; set => tableros = value; }
-    public List<Usuario> Usuarios { get => usuarios; set => usuarios = value; }
-}

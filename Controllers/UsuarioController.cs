@@ -21,10 +21,10 @@ public class UsuarioController : Controller
         if(HttpContext.Session.GetString("Rol")==null){
             return RedirectToRoute(new{controller = "Login", action = "Index"});
         }else if(isAdmin()){
-            List<Usuario> usuarios = usuarioRepository.GetAllUsuarios();
+            ViewUsuarioListado usuarios = new ViewUsuarioListado(usuarioRepository.GetAllUsuarios());
             return View(usuarios);
         }else{
-            List<Usuario> usuarios = usuarioRepository.GetAllUsuarios().FindAll(u => u.Id ==  HttpContext.Session.GetInt32("id"));
+            ViewUsuarioListado usuarios = new ViewUsuarioListado(usuarioRepository.GetAllUsuarios().FindAll(u => u.Id ==  HttpContext.Session.GetInt32("id")));
             return View(usuarios);
         }
     }
@@ -33,14 +33,15 @@ public class UsuarioController : Controller
     public IActionResult CrearUsuario()
     {
         if(isAdmin()){
-            return View(new Usuario());
+            return View(new ViewUsuarioAdd());
         }
         return RedirectToRoute(new{controller = "Login", action = "Index"});
     }
     [HttpPost]
-    public IActionResult CrearUsuario(Usuario usuario)
+    public IActionResult CrearUsuario(ViewUsuarioAdd viewUsuarioAdd)
     {
         if(isAdmin()){
+            var usuario = new Usuario(viewUsuarioAdd);
             usuarioRepository.AddUsuario(usuario);
             return RedirectToAction("Index");
         }
@@ -52,12 +53,12 @@ public class UsuarioController : Controller
         if(HttpContext.Session.GetString("Rol")==null){
             return RedirectToRoute(new{controller = "Login", action = "Index"});
         }else if(isAdmin()){
-            var usuario = usuarioRepository.GetAllUsuarios().FirstOrDefault(u => u.Id == id);
-            return View(usuario);
+            var viewUsuarioUpdate = new ViewUsuarioUpdate(usuarioRepository.GetAllUsuarios().FirstOrDefault(u => u.Id == id));
+            return View(viewUsuarioUpdate);
         }else{
             if(HttpContext.Session.GetInt32("id")==id){
-                var usuario = usuarioRepository.GetAllUsuarios().FirstOrDefault(u => u.Id == id);
-                return View("ModificarUsuarioOperador",usuario);
+                var viewUsuarioUpdate = new ViewUsuarioUpdate(usuarioRepository.GetAllUsuarios().FirstOrDefault(u => u.Id == id));
+                return View("ModificarUsuarioOperador",viewUsuarioUpdate);
                 //return RedirectToAction("ModificarUsuario",usuario);
             }else{
                 return RedirectToAction("Index");
@@ -65,14 +66,16 @@ public class UsuarioController : Controller
         }
     }
     [HttpPost]
-    public IActionResult ModificarUsuario(int id, Usuario usuario)
+    public IActionResult ModificarUsuario(int id, ViewUsuarioUpdate viewUsuarioUpdate)
     {
         if(HttpContext.Session.GetString("Rol")==null){
             return RedirectToRoute(new{controller = "Login", action = "Index"});
         }else if(isAdmin()){
+            var usuario = new Usuario(viewUsuarioUpdate);
             usuarioRepository.UpdateUsuario(id,usuario);
         }else{
             if(HttpContext.Session.GetInt32("id")==id){
+                var usuario = new Usuario(viewUsuarioUpdate);
                 usuarioRepository.UpdateUsuario(id,usuario);
             }
         }
