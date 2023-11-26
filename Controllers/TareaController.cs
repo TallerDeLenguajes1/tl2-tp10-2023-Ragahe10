@@ -87,8 +87,11 @@ public class TareaController : Controller
     }
     public IActionResult EliminarTarea(int id)
     {
-        tareaRepository.DeleteTarea(id);
-        return RedirectToAction("index");
+        if(HttpContext.Session.GetInt32("Rol")!=null){
+            tareaRepository.DeleteTarea(id);
+            return RedirectToAction("index");
+        }
+        return RedirectToRoute(new{controller = "Login", action = "Index"});
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
