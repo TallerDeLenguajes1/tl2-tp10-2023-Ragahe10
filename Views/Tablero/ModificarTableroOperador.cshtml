@@ -16,7 +16,9 @@
                         if(u.Id==0){
                             <option value="@u.Id">Sin Propietario</option>
                         }else{
-                            <option value="@u.Id">@u.NombreDeUsuario</option>
+                            if(u.Id == Model.IdUsuarioPropietario){
+                                <option value="@u.Id">@u.NombreDeUsuario</option>
+                            }
                         }
                     }
                 </select>

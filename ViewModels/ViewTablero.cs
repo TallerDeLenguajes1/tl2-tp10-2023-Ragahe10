@@ -17,18 +17,22 @@ public class ViewTablero {
         Descripcion = tablero.Descripcion;
     }
 }
-public class ViewTableroAdd {
+public class ViewTableroUpdate {
 
     public int Id {get;set;}
     public int IdUsuarioPropietario {get;set;}
     public string Nombre {get;set;}
     public string Descripcion {get;set;}
     public List<Usuario> Usuarios {get;set;}
-    public ViewTableroAdd()
+    public ViewTableroUpdate()
     {
     }
-    public ViewTableroAdd(List<Usuario> usuarios)
+    public ViewTableroUpdate(Tablero tablero, List<Usuario> usuarios)
     {
+        Id = tablero.Id;
+        IdUsuarioPropietario = tablero.IdUsuarioPropietario;
+        Nombre = tablero.Nombre;
+        Descripcion = tablero.Descripcion;
         Usuarios = usuarios;
     }
 }
