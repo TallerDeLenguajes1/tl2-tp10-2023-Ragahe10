@@ -6,6 +6,10 @@ public class Usuario{
     private string rol;
     private string pass;
 
+    public Usuario()
+    {
+    }
+
     public Usuario(ViewUsuarioAdd viewUsuarioAdd)
     {
         id = viewUsuarioAdd.Id;

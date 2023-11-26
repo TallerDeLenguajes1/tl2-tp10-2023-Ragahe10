@@ -8,11 +8,13 @@ public class TableroController : Controller
 {
     private readonly ILogger<TableroController> _logger;
     private ITableroRepository tableroRepository;
+    private IUsuarioRepository usuarioRepository;
 
     public TableroController(ILogger<TableroController> logger)
     {
         _logger = logger;
         tableroRepository = new TableroRepository();
+        usuarioRepository = new UsuarioRepository();
     }
 
     [HttpGet]
@@ -21,10 +23,11 @@ public class TableroController : Controller
         if(HttpContext.Session.GetString("Rol")==null){
             return RedirectToRoute(new{controller = "Login", action = "Index"});
         }else if(isAdmin()){
-            List<Tablero> tableros = tableroRepository.GetAllTableros();
-            return View(tableros);
+            ViewTableroListado viewTableros = new ViewTableroListado(tableroRepository.GetAllTableros(),usuarioRepository.GetAllUsuarios());
+            
+            return View(viewTableros);
         }else{
-            List<Tablero> tableros = tableroRepository.GetAllTableros().FindAll(t => t.IdUsuarioPropietario == HttpContext.Session.GetInt32("id"));
+            ViewTableroListado tableros = new ViewTableroListado(tableroRepository.GetAllTableros().FindAll(t => t.IdUsuarioPropietario == HttpContext.Session.GetInt32("id")),usuarioRepository.GetAllUsuarios());
             return View(tableros);
         }
     }
@@ -32,7 +35,7 @@ public class TableroController : Controller
     [HttpGet]
     public IActionResult CrearTablero()
     {
-        if(isAdmin()) return View(new Tablero());
+        if(isAdmin()) return View(new ViewTableroAdd(usuarioRepository.GetAllUsuarios()));
         return RedirectToRoute(new{controller = "Login", action = "Index"});
     }
     [HttpPost]

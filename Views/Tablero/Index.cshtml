@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Tablero";    
 }
-@model List<Tablero>
+@model ViewTableroListado
 
 <div class="text-center">
     <h1 class="display-4">Tableros</h1>
@@ -9,7 +9,7 @@
         <thead>
             <tr class="table-dark">
                 <th scope="col">ID</th>
-                <th scope="col">ID Propietario</th>
+                <th scope="col">Propietario</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Descrpcion</th>
                 <th scope="col">Modificar</th>
@@ -17,10 +17,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var t in Model){
+            @foreach(var t in Model.ViewTableros){
                 <tr>
                     <th class="m-auto" scope="row">@t.Id</th>
-                    <th class="m-auto" scope="row">@t.IdUsuarioPropietario</th>
+                    <th class="m-auto" scope="row">@t.UsuarioPropietario</th>
                     <td class="m-auto col">@t.Nombre</td>
                     <td class="m-auto col-6">@t.Descripcion</td>
                     <td><a class="btn  btn-outline-primary" asp-controller="Tablero" asp-action="ModificarTablero" asp-route-id="@t.Id"><i class="bi bi-pencil-square"></i></a></td>

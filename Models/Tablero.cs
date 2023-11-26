@@ -5,6 +5,17 @@ public class Tablero{
     private string nombre;
     private string descripcion;
 
+    public Tablero()
+    {
+    }
+    public Tablero(ViewTableroAdd tableroAdd)
+    {
+        id = tableroAdd.Id;
+        idUsuarioPropietario = tableroAdd.IdUsuarioPropietario;
+        nombre = tableroAdd.Nombre;
+        descripcion = tableroAdd.Descripcion;
+    }
+
     public int Id { get => id; set => id = value; }
     public int IdUsuarioPropietario { get => idUsuarioPropietario; set => idUsuarioPropietario = value; }
     public string Nombre { get => nombre; set => nombre = value; }
