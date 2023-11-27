@@ -1,4 +1,5 @@
 namespace tl2_tp10_2023_Ragahe10.Models;
+using System.ComponentModel.DataAnnotations;
 
 public class ViewTareaUpdate{
     public int Id {get;set;}

@@ -87,11 +87,17 @@ public class TareaController : Controller
     }
     public IActionResult EliminarTarea(int id)
     {
-        if(HttpContext.Session.GetInt32("Rol")!=null){
-            tareaRepository.DeleteTarea(id);
-            return RedirectToAction("index");
+        if(HttpContext.Session.GetString("Rol")==null){
+            return RedirectToRoute(new{controller = "Login", action = "Index"});
+        }else if(isAdmin()){
+             tareaRepository.DeleteTarea(id);
+        }else{
+            var tarea = tareaRepository.GetTarea(id);
+            if(tarea!=null && HttpContext.Session.GetInt32("id")==tarea.IdUsuarioAsignado){
+                tareaRepository.DeleteTarea(id);
+            }
         }
-        return RedirectToRoute(new{controller = "Login", action = "Index"});
+        return RedirectToAction("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

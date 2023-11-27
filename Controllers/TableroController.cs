@@ -90,9 +90,16 @@ public class TableroController : Controller
         if(HttpContext.Session.GetString("Rol") == null){
                 return RedirectToRoute(new{controller = "Login", action = "Index"});
         }else{
-            tableroRepository.DeleteTablero(id);
-            return RedirectToAction("Index");
+            if(isAdmin()){
+                tableroRepository.DeleteTablero(id);
+            }else{
+                var tablero = tableroRepository.GetTablero(id);
+                if(tablero!=null && tablero.Id==HttpContext.Session.GetInt32("id")){
+                    tableroRepository.DeleteTablero(id);
+                }
+            }
         }
+        return RedirectToAction("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

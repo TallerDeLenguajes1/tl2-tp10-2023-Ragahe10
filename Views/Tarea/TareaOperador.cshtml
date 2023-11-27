@@ -32,34 +32,6 @@
                     <td class="m-auto col">@t.Estado</td>
                     <th class="m-auto" scope="row">@t.UsuarioAsignado</th>
                     <td><a class="btn  btn-outline-primary" asp-controller="Tarea" asp-action="ModificarTarea" asp-route-id="@t.Id"><i class="bi bi-pencil-square"></i></a></td>
-                    <td>
-                        @* <a class="btn  btn-outline-danger" asp-controller="Tablero" asp-action="EliminarTablero" asp-route-idTablero="@u.Id" onclick="return confirm('¿Estas seguro que quieres eliminar a @u.NombreDeTablero?')"><i class="bi bi-trash"></i></a> *@
-
-                        @* <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@t.Id">
-                            <i class="bi bi-trash"></i>
-                        </button> *@
-
-                        <!-- Modal -->
-                        @* <div class="modal fade" id="exampleModal-@t.Id" tabindex="-1" aria-labelledby="exampleModalLabel-@t.Id"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel-@t.Id">Eliminar Tarea</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>¿Desea eliminar a @t.Nombre?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <a class="btn  btn-outline-danger" asp-controller="Tarea" asp-action="EliminarTarea" asp-route-id="@t.Id">Confirmar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td> *@
                 </tr>
             }
         </tbody>

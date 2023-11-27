@@ -44,6 +44,7 @@
             <div class="mb-3">
                 <label asp-for="@Model.IdUsuarioAsignado">Usuario Asignado: </label>
                 <select class="form-select" asp-for="@Model.IdUsuarioAsignado" readonly>
+                    <option value="0">Sin Asignar</option>
                     @foreach(var usuario in Model.Usuarios){
                         if(usuario.Id == Model.IdUsuarioAsignado){
                             <option value="@usuario.Id">@usuario.NombreDeUsuario</option>
