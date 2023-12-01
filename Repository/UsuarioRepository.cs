@@ -8,7 +8,13 @@ namespace tl2_tp10_2023_Ragahe10.Models;
 
 public class UsuarioRepository : IUsuarioRepository {
     private string[] roles = {"Administrador", "Operador"};
-    private string cadenaConexion = "Data Source=DataBase/kanban.db;Cache=Shared";
+    private string cadenaConexion;
+
+    public UsuarioRepository(string CadenaConexion)
+    {
+        cadenaConexion = CadenaConexion;
+    }
+
     public void AddUsuario(Usuario usuario){
         var query = @"INSERT INTO Usuario (nombre_de_usuario,rol,pass) VALUES (@nombre_de_usuario,@rol,@pass);";
         using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){

@@ -2,10 +2,16 @@ namespace tl2_tp10_2023_Ragahe10.Models;
 using System.ComponentModel.DataAnnotations;
 
 public class ViewUsuarioUpdate{
-    private int id;
-    private string nombreDeUsuario;
-    private string rol;
-    private string pass;
+    public int Id;
+    [Required (ErrorMessage ="Este campo es requerido")]
+    [StringLength(100)]
+    public string NombreDeUsuario;
+    [Required (ErrorMessage ="Este campo es requerido")]
+    [StringLength(50)]
+    public string Rol;
+    [Required (ErrorMessage ="Este campo es requerido")]
+    [StringLength(20)]
+    public string Pass;
 
     public ViewUsuarioUpdate()
     {
@@ -13,15 +19,9 @@ public class ViewUsuarioUpdate{
 
     public ViewUsuarioUpdate(Usuario usuario)
     {
-        id = usuario.Id;
-        nombreDeUsuario = usuario.NombreDeUsuario;
-        rol = usuario.Rol;
-        pass = usuario.Pass;
-    }
-
-    public int Id { get => id; set => id = value; }
-    public string NombreDeUsuario { get => nombreDeUsuario; set => nombreDeUsuario = value; }
-    public string Rol { get => rol; set => rol = value; }
-    public string Pass { get => pass; set => pass = value; }
-    
+        Id = usuario.Id;
+        NombreDeUsuario = usuario.NombreDeUsuario;
+        Rol = usuario.Rol;
+        Pass = usuario.Pass;
+    }    
 }

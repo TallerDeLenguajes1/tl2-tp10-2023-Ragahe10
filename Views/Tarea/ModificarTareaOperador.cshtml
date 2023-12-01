@@ -4,8 +4,8 @@
 @model ViewTareaUpdate;
 
 <div class="text-center d-flex flex-column align-items-center">
-    <h1 class="text-primary">Modificar Tarea</h1>
-    <form class="w-50 my-2 p-4 border border-3 border-primary rounded-2 border-opacity-25" asp-controller="Tarea" asp-action="ModificarTarea">
+    <h1 class="text-dark">Modificar Tarea</h1>
+    <form class="w-50 my-2 p-4 border border-3 border-dark rounded-2 border-opacity-25" asp-controller="Tarea" asp-action="ModificarTarea">
         <fieldset>
             <input hidden asp-for="@Model.Id">
             <div class="mb-3">
@@ -17,13 +17,15 @@
                         }
                     }
                 </select>
+                <span asp-validation-for="@Model.IdTablero" class="text-danger"></span>
             </div>
             <div class="mb-3 form-floating">
-                <input type="text" class="form-control" asp-for="@Model.Nombre" aria-describedby="emailHelp" placeholder="Nombre del tablero" required readonly>
+                <input type="text" class="form-control" asp-for="@Model.Nombre" aria-describedby="emailHelp" placeholder="Nombre del tablero" readonly>
                 <label asp-for="@Model.Nombre" class="form-label text-center">Nombre</label>
+                <span asp-validation-for="@Model.Nombre" class="text-danger"></span>
             </div>
             <div class="mb-3 form-floating">
-                <input type="text" class="form-control" asp-for="@Model.Descripcion" aria-describedby="emailHelp" placeholder="Descripcion del tablero" required readonly>
+                <input type="text" class="form-control" asp-for="@Model.Descripcion" aria-describedby="emailHelp" placeholder="Descripcion del tablero" readonly>
                 <label asp-for="@Model.Descripcion" class="form-label text-center">Descripcion</label>
             </div>
             <div class="mb-3">
@@ -40,6 +42,7 @@
                     <option value="3">Review</option>
                     <option value="4">Done</option>
                 </select>
+                <span asp-validation-for="@Model.Estado" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="@Model.IdUsuarioAsignado">Usuario Asignado: </label>
@@ -56,3 +59,4 @@
         </fieldset>
     </form>
 </div>
+@section Scripts{<partial name="_ValidationScriptsPartial"/>}

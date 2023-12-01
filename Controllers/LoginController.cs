@@ -7,29 +7,30 @@ namespace tl2_tp10_2023_Ragahe10.Controllers;
 public class LoginController : Controller
 {
     private readonly ILogger<LoginController> _logger;
-    private IUsuarioRepository usuarioRepository;
+    private IUsuarioRepository _usuarioRepository;
 
-    public LoginController(ILogger<LoginController> logger)
+    public LoginController(ILogger<LoginController> logger, IUsuarioRepository usuarioRepository)
     {
         _logger = logger;
-        usuarioRepository = new UsuarioRepository();
+        _usuarioRepository = usuarioRepository;
     }
-
     public IActionResult Index()
     {
         return View(new UsuarioLogin());
     }
 
     public IActionResult Login(UsuarioLogin userLog)
-    {
-        var user = usuarioRepository.GetAllUsuarios().FirstOrDefault(u => u.NombreDeUsuario == userLog.Nombre && u.Pass == userLog.Pass);
-        if(user == null) return RedirectToAction("Index");
-        LogearUsuario(user);
+    {   if(ModelState.IsValid){
+            var user = _usuarioRepository.GetAllUsuarios().FirstOrDefault(u => u.NombreDeUsuario == userLog.Nombre && u.Pass == userLog.Pass);
+            if(user == null) return RedirectToAction("Index");
+            LogearUsuario(user);
 
-        return RedirectToRoute(new{controller = "Home", action = "Index"});
-
+            return RedirectToRoute(new{controller = "Home", action = "Index"});
+        }
+        return RedirectToAction("Index");
     }
     private void LogearUsuario(Usuario user){
+        
         HttpContext.Session.SetString("User",user.NombreDeUsuario);
         HttpContext.Session.SetString("Rol",user.Rol);
         HttpContext.Session.SetInt32("id",user.Id);

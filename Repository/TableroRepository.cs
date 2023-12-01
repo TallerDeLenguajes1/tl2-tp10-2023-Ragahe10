@@ -7,7 +7,13 @@ namespace tl2_tp10_2023_Ragahe10.Models;
 
 
 public class TableroRepository : ITableroRepository {
-    private string cadenaConexion = "Data Source=DataBase/kanban.db;Cache=Shared";
+    private string cadenaConexion;
+
+    public TableroRepository(string CadenaConexion)
+    {
+        this.cadenaConexion = CadenaConexion;
+    }
+
     public void AddTablero(Tablero tablero){
         var query = @"INSERT INTO Tablero (id_usuario_propietario,nombre,descripcion) VALUES (@idUsuario, @nombreT, @descripcion);";
         using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){

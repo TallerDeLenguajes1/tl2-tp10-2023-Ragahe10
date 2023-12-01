@@ -4,8 +4,8 @@
 @model ViewTableroAdd
 
 <div class="text-center d-flex flex-column align-items-center">
-    <h1 class="text-success">Crear Tablero</h1>
-    <form class="w-50 my-2 p-4 border border-3 border-success rounded-2 border-opacity-25" asp-controller="Tablero" asp-action="CrearTablero">
+    <h1 class="text-dark">Crear Tablero</h1>
+    <form class="w-50 my-2 p-4 border border-3 border-dark rounded-2 border-opacity-25" asp-controller="Tablero" asp-action="CrearTablero">
         <fieldset>
             <div class="mb-3">
                 <label asp-for="@Model.IdUsuarioPropietario">Usuario Propietario</label>
@@ -15,16 +15,19 @@
                         <option value="@u.Id">@u.NombreDeUsuario</option>
                     }
                 </select>
+                <span asp-validation-for="@Model.IdUsuarioPropietario" class="text-danger"></span>
             </div>
             <div class="mb-3 form-floating">
-                <input type="text" class="form-control" asp-for="@Model.Nombre" aria-describedby="emailHelp" placeholder="Nombre del tablero" required>
+                <input type="text" class="form-control" asp-for="@Model.Nombre" aria-describedby="emailHelp" placeholder="Nombre del tablero">
                 <label asp-for="@Model.Nombre" class="form-label text-center">Nombre</label>
+                <span asp-validation-for="@Model.Nombre" class="text-danger"></span>
             </div>
             <div class="mb-3 form-floating">
-                <input type="text" class="form-control" asp-for="@Model.Descripcion" aria-describedby="emailHelp" placeholder="Descripcion" required>
+                <input type="text" class="form-control" asp-for="@Model.Descripcion" aria-describedby="emailHelp" placeholder="Descripcion">
                 <label asp-for="@Model.Descripcion" class="form-label text-center">Descripcion</label>
             </div>
             <button type="submit" class="btn  btn-outline-success">Submit</button>
         </fieldset>
     </form>
 </div>
+@section Scripts{<partial name="_ValidationScriptsPartial"/>}

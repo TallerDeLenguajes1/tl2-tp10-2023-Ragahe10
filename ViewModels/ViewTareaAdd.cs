@@ -2,10 +2,17 @@ namespace tl2_tp10_2023_Ragahe10.Models;
 using System.ComponentModel.DataAnnotations;
 
 public class ViewTareaAdd{
+    [Required (ErrorMessage ="este campo es requerido")]
     public int IdTablero {get;set;}
+    [Required (ErrorMessage ="este campo es requerido")]
+    [StringLength(100)]
     public string Nombre {get;set;}
+    [StringLength(2000)]
     public string Descripcion {get;set;}
+    [Required (ErrorMessage ="este campo es requerido")]
+    [StringLength(100)]
     public string Color {get;set;}
+    [Required (ErrorMessage ="este campo es requerido")]
     public EstadoTarea Estado {get;set;}
     public int IdUsuarioAsignado {get;set;}
     private List<Tablero> tableros;

@@ -1,7 +1,14 @@
+using tl2_tp10_2023_Ragahe10.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+var CadenaDeConexion = builder.Configuration.GetConnectionString("SqliteConexion")!.ToString();//el signo de exclamacion es para decir que no es null
+builder.Services.AddSingleton<string>(CadenaDeConexion);
+builder.Services.AddScoped<IUsuarioRepository,UsuarioRepository>();
+builder.Services.AddScoped<ITableroRepository,TableroRepository>();
+builder.Services.AddScoped<ITareaRepository,TareaRepository>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
  {

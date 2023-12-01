@@ -6,7 +6,13 @@ using System.Data.SQLite;
 using System.Data.SqlClient;
 namespace tl2_tp10_2023_Ragahe10.Models;
 public class TareaRepository : ITareaRepository{
-    private string cadenaConexion = "Data Source=DataBase/kanban.db;Cache=Shared";
+    private string cadenaConexion;
+
+    public TareaRepository(string CadenaConexion)
+    {
+        cadenaConexion = CadenaConexion;
+    }
+
     public void AddTarea(Tarea tarea){
         var query = @"INSERT INTO Tarea (id_tablero,nombre,estado,descripcion,color,id_usuario_asignado) VALUES (@id_tablero,@nombre,@estado,@descripcion,@color,@id_usuario);";
         using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
