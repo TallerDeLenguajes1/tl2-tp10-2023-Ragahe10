@@ -21,16 +21,23 @@ public class LoginController : Controller
 
     public IActionResult Login(UsuarioLogin userLog)
     {   if(ModelState.IsValid){
-            var user = _usuarioRepository.GetAllUsuarios().FirstOrDefault(u => u.NombreDeUsuario == userLog.Nombre && u.Pass == userLog.Pass);
-            if(user == null) return RedirectToAction("Index");
-            LogearUsuario(user);
-
-            return RedirectToRoute(new{controller = "Home", action = "Index"});
+            try{
+                var user = _usuarioRepository.GetAllUsuarios().FirstOrDefault(u => u.NombreDeUsuario == userLog.Nombre && u.Pass == userLog.Pass);
+                if(user == null){
+                    _logger.LogWarning("Intento de acceso invalido - Usuario: "+userLog.Nombre+" Clave ingresada: " + userLog.Pass);
+                    return RedirectToAction("Index");
+                }
+                _logger.LogInformation("El usuario: "+userLog.Nombre+" ingreso correctamente");
+                LogearUsuario(user);
+                return RedirectToRoute(new{controller = "Home", action = "Index"});
+            }catch(Exception ex){
+                _logger.LogError(ex.ToString());
+                return BadRequest();
+            }
         }
         return RedirectToAction("Index");
     }
     private void LogearUsuario(Usuario user){
-        
         HttpContext.Session.SetString("User",user.NombreDeUsuario);
         HttpContext.Session.SetString("Rol",user.Rol);
         HttpContext.Session.SetInt32("id",user.Id);
