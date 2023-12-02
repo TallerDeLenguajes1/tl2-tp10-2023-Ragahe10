@@ -14,12 +14,22 @@ public class HomeController : Controller
     }
     public IActionResult Index()
     {
-        return View();
+        try{
+            return View();
+        }catch (Exception ex){
+            _logger.LogError(ex.ToString());
+            return BadRequest();
+        }
     }
 
     public IActionResult Privacy()
     {
-        return View();
+        try{
+            return View();
+        }catch (Exception ex){
+            _logger.LogError(ex.ToString());
+            return BadRequest();
+        }
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
