@@ -65,6 +65,8 @@ public class UsuarioRepository : IUsuarioRepository {
                 }
             }
         }
+        if (usuarios==null)
+            throw new Exception("Tableros no creado.");
         return usuarios;
     }
     public Usuario GetUsuario(int idUsuario){
@@ -82,6 +84,8 @@ public class UsuarioRepository : IUsuarioRepository {
             }
             connection.Close();
         }
+        if (usuario==null)
+            throw new Exception("Tableros no creado.");
         return usuario;
     }
     public void DeleteUsuario(int idUsuario){

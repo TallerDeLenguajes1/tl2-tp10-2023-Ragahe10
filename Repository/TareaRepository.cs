@@ -57,8 +57,9 @@ public class TareaRepository : ITareaRepository{
     }
     public Tarea GetTarea(int idTarea){
         Tarea tarea = GetAllTareas().FirstOrDefault(t => t.Id == idTarea);
+        if (tarea==null)
+            throw new Exception("Tableros no creado.");
         return tarea;
-
     }
     public List<Tarea> GetAllTareas(){
         var query = @"SELECT * FROM Tarea;";
@@ -85,6 +86,8 @@ public class TareaRepository : ITareaRepository{
             }
             connection.Close();
         }
+        if (tareas==null)
+            throw new Exception("Tableros no creado.");
         return tareas;
     }
     public void DeleteTarea(int idTarea){

@@ -57,6 +57,8 @@ public class TableroRepository : ITableroRepository {
             }
             connection.Close();
         }
+        if (tablero==null)
+            throw new Exception("Tableros no creado.");
         return tablero;
     }
     public List<Tablero> GetAllTableros(){
@@ -77,6 +79,8 @@ public class TableroRepository : ITableroRepository {
             }
             connection.Close();
         }
+        if (tableros==null)
+            throw new Exception("Tableros no creado.");
         return tableros;
     }
     public List<Tablero> GetAllTablerosForUsuario(int idUsuario){
@@ -98,6 +102,8 @@ public class TableroRepository : ITableroRepository {
             }
             connection.Close();
         }
+        if (tableros==null)
+            throw new Exception("Tableros no creado.");
         return tableros;
     }
     public void DeleteTablero(int idTablero){
