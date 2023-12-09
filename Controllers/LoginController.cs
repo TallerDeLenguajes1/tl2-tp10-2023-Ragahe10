@@ -34,13 +34,13 @@ public class LoginController : Controller
                     return RedirectToRoute(new{controller = "Home", action = "Index"});
                 }catch(Exception ex){
                     _logger.LogError(ex.ToString());
-                    return BadRequest();
+                     return RedirectToAction("Index");
                 }
             }
             return RedirectToAction("Index");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     private void LogearUsuario(Usuario user){

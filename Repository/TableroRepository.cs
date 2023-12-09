@@ -103,7 +103,7 @@ public class TableroRepository : ITableroRepository {
             connection.Close();
         }
         if (tableros==null)
-            throw new Exception("Tableros no creado.");
+            throw new Exception("Tableros no creados.");
         return tableros;
     }
     public void DeleteTablero(int idTablero){

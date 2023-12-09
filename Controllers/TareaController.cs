@@ -35,7 +35,7 @@ public class TareaController : Controller
             }
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
 
@@ -50,7 +50,7 @@ public class TareaController : Controller
             return RedirectToRoute(new{controller = "Login", action = "Index"});
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     [HttpPost]
@@ -68,7 +68,7 @@ public class TareaController : Controller
             return RedirectToAction("CrearTarea");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     [HttpGet]
@@ -90,7 +90,7 @@ public class TareaController : Controller
             }
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     [HttpPost]
@@ -113,7 +113,7 @@ public class TareaController : Controller
             return RedirectToAction("ModificarTarea");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     public IActionResult EliminarTarea(int id)
@@ -132,7 +132,7 @@ public class TareaController : Controller
             return RedirectToAction("Index");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
 

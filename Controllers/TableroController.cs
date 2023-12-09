@@ -33,7 +33,7 @@ public class TableroController : Controller
             }
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
 
@@ -45,7 +45,7 @@ public class TableroController : Controller
             return RedirectToRoute(new{controller = "Login", action = "Index"});
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     [HttpPost]
@@ -63,7 +63,7 @@ public class TableroController : Controller
             return RedirectToAction("CrearTablero");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     [HttpGet]
@@ -87,7 +87,7 @@ public class TableroController : Controller
             return RedirectToAction("Index");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+           return RedirectToAction("Error");
         }
     }
     [HttpPost]
@@ -114,7 +114,7 @@ public class TableroController : Controller
             return RedirectToAction("ModificarTablero");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     public IActionResult EliminarTablero(int id)
@@ -135,7 +135,7 @@ public class TableroController : Controller
             return RedirectToAction("Index");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -30,7 +30,7 @@ public class UsuarioController : Controller
             }
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
 
@@ -44,7 +44,7 @@ public class UsuarioController : Controller
             return RedirectToRoute(new{controller = "Login", action = "Index"});
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     [HttpPost]
@@ -62,7 +62,7 @@ public class UsuarioController : Controller
             return RedirectToAction("CrearUsuario");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     [HttpGet]
@@ -85,7 +85,7 @@ public class UsuarioController : Controller
             }
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     [HttpPost]
@@ -109,7 +109,7 @@ public class UsuarioController : Controller
             return RedirectToAction("ModificarUsuario");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");;
         }
     }
     public IActionResult EliminarUsuario(int idUsuario)
@@ -127,7 +127,7 @@ public class UsuarioController : Controller
             return RedirectToAction("Index");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
-            return BadRequest();
+            return RedirectToAction("Error");
         }
     }
     private bool isAdmin(){
