@@ -1,9 +1,13 @@
-namespace tl2_tp10_2023_Ragahe10.Models;
-
-public interface IUsuarioRepository {
+namespace Proyecto.Repository;
+using Proyecto.Models;
+using Proyecto.ViewModels;
+public interface IUsuarioRepository{
     public void AddUsuario(Usuario usuario);
-    public void UpdateUsuario(int idUsuario, Usuario usuario);
+    public Usuario GetUsuario(int id);
+    public Usuario GetUsuarioLogin(ViewUsuarioLogin user);
     public List<Usuario> GetAllUsuarios();
-    public Usuario GetUsuario(int idUsuario);
-    public void DeleteUsuario(int idUsuario);
+    public void UpdateUsuario(int id, ViewUsuarioUpdate viewUsuario);
+    public void UpdateUsuarioRol(int id, string rol);
+    public bool Existe(string nombre);
+    public void DeleteUsuario(int id);
 }

@@ -10,7 +10,6 @@
             <div class="mb-3">
                 <label asp-for="@Model.IdTablero">Tablero: </label>
                 <select class="form-select" asp-for="@Model.IdTablero">
-                    <option selected value="0">Sin Tablero</option>
                     @foreach(var tablero in Model.Tableros){
                         <option value="@tablero.Id">@tablero.Nombre</option>
                     }
@@ -31,23 +30,12 @@
                 <input asp-for="@Model.Color" class="form-control" id="stringColor" name="Color" readonly hidden>
                 <input type="color" class="form-control" id="Color" onchange="GuardarColor()">
             </div>
-            <div class="mb-3">
-                <label asp-for="@Model.Estado">Estado: </label>
-                <select class="form-select" asp-for="@Model.Estado">
-                    <option selected value="0">Ideas</option>
-                    <option value="1">ToDo</option>
-                    <option value="2">Doing</option>
-                    <option value="3">Review</option>
-                    <option value="4">Done</option>
-                </select>
-                <span asp-validation-for="@Model.Estado" class="text-danger"></span>
-            </div>
+            <input asp-for="@Model.Estado" value="0" hidden>
             <div class="mb-3">
                 <label asp-for="@Model.IdUsuarioAsignado">Usuario Asignado: </label>
                 <select class="form-select" asp-for="@Model.IdUsuarioAsignado">
-                    <option selected value="0">Sin Asignar</option>
                     @foreach(var usuario in Model.Usuarios){
-                        <option value="@usuario.Id">@usuario.NombreDeUsuario</option>
+                        <option value="@usuario.Id">@usuario.Nombre_de_usuario</option>
                     }
                 </select>
             </div>

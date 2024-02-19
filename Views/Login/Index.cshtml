@@ -1,21 +1,23 @@
 @{
     ViewData["Title"] = "Logueo";
 }
-@model UsuarioLogin
+@model ViewUsuarioLogin
 
 <div class="text-center m-4 p-4">
     <h1 class="text-success">Logueo</h1>
-    <form class="m-auto w-50 form-floating" asp-controller="Login" asp-action="Login" method="post">
+    <form class="m-auto w-50 needs-validation" novalidate asp-controller="Login" asp-action="Login" method="post">
         <fieldset>
-            <div class="form-floating mb-3">
-                <input type="text" asp-for="@Model.Nombre" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Nombre</label>
+            <div class="my-3">
+                <label asp-for="@Model.Name" class="form-label">Usuario</label>
+                <input type="text" asp-for="@Model.Name" class="form-control" placeholder="ElMejorUsuario29">
+                <span asp-validation-for="@Model.Name" class="text-danger"></span> 
             </div>
-            <div class="form-floating">
-                <input type="password" asp-for="@Model.Pass" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Contraseña</label>
+            <div class="my-3">
+                <label asp-for="@Model.Pass">Contraseña</label>
+                <input type="password" asp-for="@Model.Pass" class="form-control" placeholder="Contraseña">
+                <span asp-validation-for="@Model.Pass" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn my-4 px-3 fs-3 btn-outline-success">Enviar</button>
+            <button type="submit" class="btn my-4 w-50 fs-5 btn-outline-success">Enviar</button>
         </fieldset>
     </form>
 </div>

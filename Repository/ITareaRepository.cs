@@ -1,11 +1,12 @@
-namespace tl2_tp10_2023_Ragahe10.Models;
-
-public interface ITareaRepository{
+namespace Proyecto.Repository;
+using Proyecto.Models;
+using Proyecto.ViewModels;
+public interface ITareaRepository {
     public void AddTarea(Tarea tarea);
-    public void UpdateTarea(int idTarea, Tarea tarea);
-    public void UpdateEstadoTarea(int id, EstadoTarea estado);
-    public Tarea GetTarea(int idTarea);
+    public Tarea GetTarea(int id);
     public List<Tarea> GetAllTareas();
-    public void DeleteTarea(int idTarea);
-    public void AssingTarea(int idUsuario, int idTarea);
+    public List<ViewTareaInfo> GetAllTareasForTablero(int id);
+    public List<ViewTarea> GetAllTareasView();
+    public void UpdateTarea(int id, Tarea tarea);
+    public void DeleteTarea(int id);
 }

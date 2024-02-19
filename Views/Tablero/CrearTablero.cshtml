@@ -8,14 +8,21 @@
     <form class="w-50 my-2 p-4 border border-3 border-dark rounded-2 border-opacity-25" asp-controller="Tablero" asp-action="CrearTablero">
         <fieldset>
             <div class="mb-3">
-                <label asp-for="@Model.IdUsuarioPropietario">Usuario Propietario</label>
-                <select class="form-select" asp-for="@Model.IdUsuarioPropietario">
-                    <option selected value="0">Sin Propietario</option>
-                    @foreach (var u in Model.Usuarios){
-                        <option value="@u.Id">@u.NombreDeUsuario</option>
-                    }
-                </select>
-                <span asp-validation-for="@Model.IdUsuarioPropietario" class="text-danger"></span>
+                @if(Context.Session.GetString("Rol") == "Administrador"){
+                    <label asp-for="@Model.IdUsuarioPropietario">Usuario Propietario</label>
+                    <select class="form-select" asp-for="@Model.IdUsuarioPropietario">
+                        @foreach (var u in Model.Usuarios){
+                            <option value="@u.Id">@u.Nombre_de_usuario</option>
+                        }
+                    </select>
+                    <span asp-validation-for="@Model.IdUsuarioPropietario" class="text-danger"></span>
+                }else{
+                    <label asp-for="@Model.IdUsuarioPropietario">Usuario Propietario</label>
+                    <select class="form-select" asp-for="@Model.IdUsuarioPropietario">
+                        <option selected value="@Context.Session.GetInt32("Id")">@Context.Session.GetString("User")</option>
+                    </select>
+                    <span asp-validation-for="@Model.IdUsuarioPropietario" class="text-danger"></span>
+                }
             </div>
             <div class="mb-3 form-floating">
                 <input type="text" class="form-control" asp-for="@Model.Nombre" aria-describedby="emailHelp" placeholder="Nombre del tablero">

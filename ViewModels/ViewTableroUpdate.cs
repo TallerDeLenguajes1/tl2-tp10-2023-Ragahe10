@@ -1,4 +1,4 @@
-namespace tl2_tp10_2023_Ragahe10.Models;
+namespace Proyecto.Models;
 using System.ComponentModel.DataAnnotations;
 public class ViewTableroUpdate {
 
@@ -10,16 +10,14 @@ public class ViewTableroUpdate {
     public string Nombre {get;set;}
     [StringLength(300)]
     public string Descripcion {get;set;}
-    public List<Usuario> Usuarios {get;set;}
     public ViewTableroUpdate()
     {
     }
-    public ViewTableroUpdate(Tablero tablero, List<Usuario> usuarios)
+    public ViewTableroUpdate(Tablero tablero)
     {
         Id = tablero.Id;
-        IdUsuarioPropietario = tablero.IdUsuarioPropietario;
+        IdUsuarioPropietario = tablero.Id_usuario_propietario;
         Nombre = tablero.Nombre;
         Descripcion = tablero.Descripcion;
-        Usuarios = usuarios;
     }
 }

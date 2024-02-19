@@ -1,35 +1,31 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using tl2_tp10_2023_Ragahe10.Models;
+using Proyecto.Models;
+using Proyecto.Repository;
+using Proyecto.ViewModels;
 
-namespace tl2_tp10_2023_Ragahe10.Controllers;
+namespace Proyecto.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private ITableroRepository _tableroRepository;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ITableroRepository tableroRepository)
     {
         _logger = logger;
+        _tableroRepository = tableroRepository;
     }
+
     public IActionResult Index()
     {
-        try{
-            return View();
-        }catch (Exception ex){
-            _logger.LogError(ex.ToString());
-            return BadRequest();
-        }
+        cargaInicial();
+        return View();
     }
 
     public IActionResult Privacy()
     {
-        try{
-            return View();
-        }catch (Exception ex){
-            _logger.LogError(ex.ToString());
-            return BadRequest();
-        }
+        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -37,4 +33,15 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    private void cargaInicial(){
+        var tableros = _tableroRepository.GetAllTableros();
+        List<ViewTableroNav> viewTableroNavs = new List<ViewTableroNav>();
+        foreach (var t in tableros)
+        {
+            var VMTablero = new ViewTableroNav(t);
+            viewTableroNavs.Add(VMTablero);
+        }
+        HttpContext.Session.SetObjectAsJson("Tableros", viewTableroNavs);
+    }
 }
+

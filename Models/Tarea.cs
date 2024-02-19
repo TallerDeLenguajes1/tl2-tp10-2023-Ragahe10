@@ -1,12 +1,28 @@
-namespace tl2_tp10_2023_Ragahe10.Models;
+namespace Proyecto.Models;
 public enum EstadoTarea{
-    Ideas, 
+    Ideas,
     ToDo, 
     Doing, 
     Review, 
     Done
 }
-public class Tarea{
+public class Tarea {
+    private int id;
+    private int id_tablero;
+    private string nombre;
+    private EstadoTarea estado;
+    private string descripcion;
+    private string color;
+    private int id_usuario_asignado;
+
+    public int Id { get => id; set => id = value; }
+    public int Id_tablero { get => id_tablero; set => id_tablero = value; }
+    public string Nombre { get => nombre; set => nombre = value; }
+    public EstadoTarea Estado { get => estado; set => estado = value; }
+    public string Descripcion { get => descripcion; set => descripcion = value; }
+    public string Color { get => color; set => color = value; }
+    public int Id_usuario_asignado { get => id_usuario_asignado; set => id_usuario_asignado = value; }
+
     public Tarea()
     {
     }
@@ -14,30 +30,11 @@ public class Tarea{
     public Tarea(ViewTareaAdd t)
     {
         Id = 0;
-        IdTablero = t.IdTablero;
+        id_tablero = t.IdTablero;
         Nombre = t.Nombre;
         Descripcion = t.Descripcion;
         Color = t.Color;
         Estado = t.Estado;
-        IdUsuarioAsignado = t.IdUsuarioAsignado;
+        id_usuario_asignado = t.IdUsuarioAsignado;
     }
-    public Tarea(ViewTareaUpdate t)
-    {
-        Id = t.Id;
-        IdTablero = t.IdTablero;
-        Nombre = t.Nombre;
-        Descripcion = t.Descripcion;
-        Color = t.Color;
-        Estado = t.Estado;
-        IdUsuarioAsignado = t.IdUsuarioAsignado;
-    }
-
-    public int Id {get;set;}
-    public int IdTablero {get;set;}
-    public string Nombre {get;set;}
-    public string Descripcion {get;set;}
-    public string Color {get;set;}
-    public EstadoTarea Estado {get;set;}
-    public int IdUsuarioAsignado {get;set;}
-    
 }

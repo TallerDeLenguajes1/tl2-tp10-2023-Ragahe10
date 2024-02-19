@@ -1,0 +1,428 @@
+@model ViewTableroVer
+@{
+    var nombre = Model.Nombre;
+    ViewData["Title"] = nombre;    
+}
+<h1 class="text-center">@Model.Nombre</h1>
+<section class="cont-columnas scroll-horizontal d-flex flex-row align-items-stretch">
+    <article class="columnas mx-3 mb-3 bg-dark p-2 rounded">
+        <h2 class="text-center text-light targeta">Detalles</h2>
+        <div class="scroll-vertical">
+            <div class="m-3 p-3 bg-white rounded">
+                <h3>Propietario</h3>
+                <button class="btn btn-secondary w-100 d-flex flex-row justify-content-center align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="rounded-circle" src="~/img/@Model.Imagen_usuario" alt="logo"
+                        width="30px" height="30px">
+                    <p class="text-white m-2">@Model.Usuario_propietario</p>
+                </button>
+            </div>
+            <div class="m-3 p-3 bg-white rounded d-flex flex-wrap">
+                <h3>Descripcion</h3>
+                <a class="btn btn-primary w-100 m-1" data-bs-toggle="modal" data-bs-target="#descripcion">
+                    Ver mas
+                </a>
+                <div class="modal fade" id="descripcion" tabindex="-1" aria-labelledby="descripcion" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="descripcion">Descripcion</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="wrap">@Model.Descripcion</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-3 p-3 bg-white rounded d-flex flex-wrap">
+                <h3>Opciones</h3>
+                @if(Context.Session.GetString("User") == Model.Usuario_propietario || (Model.Usuario_propietario == "Sin Propietario" && Context.Session.GetString("Rol") == "Administrador")){
+                    <a class="btn m-1 btn-outline-primary w-100" asp-controller="Tablero" asp-action="ModificarTablero" asp-route-id="@Model.Id">
+                        <i class="bi bi-pencil-square"></i> Editar
+                    </a>
+                    }
+                    @if(Context.Session.GetString("User")==Model.Usuario_propietario || Context.Session.GetString("Rol")=="Administrador"){
+                    <a class="btn m-1 btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#exampleModal-@Model.Id">
+                        <i class="bi bi-trash"></i> Eliminar
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal-@Model.Id" tabindex="-1" aria-labelledby="exampleModalLabel-@Model.Id"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel-@Model.Id">Eliminar Tablero</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>¿Desea eliminar a @Model.Nombre?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <a class="btn  btn-outline-danger" asp-controller="Tablero" asp-action="EliminarTablero" asp-route-id="@Model.Id">Confirmar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+            </div>
+        </div>
+    </article>
+    <article class="columnas mx-3 mb-3 bg-dark-subtle p-2 rounded">
+        <h2 class="text-center targeta">Ideas</h2>
+        <div class="scroll-vertical">
+        @foreach(var t in Model.Tareas){
+            if(t.Estado == EstadoTarea.Ideas){
+                <div class="targeta m-3 p-3 bg-white rounded d-flex flex-wrap justify-content-between">
+                    <div class="d-flex justify-content-between w-100">
+                        <h3>@t.Nombre</h3>
+                        <img height="30px" width="60px" class="rounded" style="background-color: @t.Color;">
+                    </div>
+                    <a class="btn btn-outline-primary w-100 m-1" data-bs-toggle="modal" data-bs-target="#detalle-@t.Id">
+                    Ver mas
+                    </a>
+                    @if(Context.Session.GetString("User") == t.UsuarioAsignado){
+                        <a class="btn btn-outline-secondary m-1 EditDelete" asp-controller="Tarea" asp-action="ModificarTarea" asp-route-id="@t.Id">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                    }
+                    @if(Context.Session.GetString("User")==Model.Usuario_propietario){
+                        <a class="btn btn-outline-danger m-1 EditDelete" data-bs-toggle="modal" data-bs-target="#Tarea-@t.Id">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="Tarea-@t.Id" tabindex="-1" aria-labelledby="TareaLabel-@t.Id"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="TareaLabel-@t.Id">Eliminar Tablero</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>¿Desea eliminar a @t.Nombre?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <a class="btn  btn-outline-danger" asp-controller="Tarea" asp-action="EliminarTarea" asp-route-id="@t.Id">Confirmar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="modal fade" id="detalle-@t.Id" tabindex="-1" aria-labelledby="detalle-@t.Id" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color: @t.Color;">
+                                    <h1 class="modal-title fs-5 pe-2" id="detalle-@t.Id">@t.Nombre</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Propietario </strong>
+                                        <button class="btn btn-secondary w-100 d-flex flex-row justify-content-center align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img class="rounded-circle" src="~/img/@t.Imagen" alt="logo"
+                                                width="30px" height="30px">
+                                            <p class="text-white m-2">@t.UsuarioAsignado</p>
+                                        </button>
+                                    </p>
+                                    <p class="wrap"><strong>Descripcion</strong><br>@t.Descripcion</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        </div>
+    </article>
+    <article class="columnas mx-3 mb-3 bg-dark-subtle p-2 rounded">
+        <h2 class="text-center targeta">ToDo</h2>
+        <div class="scroll-vertical">
+            @foreach(var t in Model.Tareas){
+            if(t.Estado == EstadoTarea.ToDo){
+                <div class="targeta m-3 p-3 bg-white rounded d-flex flex-wrap justify-content-between">
+                    <div class="d-flex justify-content-between w-100">
+                        <h3>@t.Nombre</h3>
+                        <img height="30px" width="60px" class="rounded" style="background-color: @t.Color;">
+                    </div>
+                    <a class="btn btn-outline-primary w-100 m-1" data-bs-toggle="modal" data-bs-target="#detalle-@t.Id">
+                    Ver mas
+                    </a>
+                    @if(Context.Session.GetString("User") == t.UsuarioAsignado){
+                        <a class="btn btn-outline-secondary m-1 EditDelete" asp-controller="Tarea" asp-action="ModificarTarea" asp-route-id="@t.Id">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                    }
+                    @if(Context.Session.GetString("User")==Model.Usuario_propietario){
+                        <a class="btn btn-outline-danger m-1 EditDelete" data-bs-toggle="modal" data-bs-target="#Tarea-@t.Id">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="Tarea-@t.Id" tabindex="-1" aria-labelledby="TareaLabel-@t.Id"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="TareaLabel-@t.Id">Eliminar Tablero</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>¿Desea eliminar a @t.Nombre?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <a class="btn  btn-outline-danger" asp-controller="Tarea" asp-action="EliminarTarea" asp-route-id="@t.Id">Confirmar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="modal fade" id="detalle-@t.Id" tabindex="-1" aria-labelledby="detalle-@t.Id" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color: @t.Color;">
+                                    <h1 class="modal-title fs-5 pe-2" id="detalle-@t.Id">@t.Nombre</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Propietario </strong>
+                                        <button class="btn btn-secondary w-100 d-flex flex-row justify-content-center align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img class="rounded-circle" src="~/img/@t.Imagen" alt="logo"
+                                                width="30px" height="30px">
+                                            <p class="text-white m-2">@t.UsuarioAsignado</p>
+                                        </button>
+                                    </p>
+                                    <p class="wrap"><strong>Descripcion</strong><br>@t.Descripcion</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        </div>
+    </article>
+    <article class="columnas mx-3 mb-3 bg-dark-subtle p-2 rounded">
+        <h2 class="text-center targeta">Doing</h2>
+        <div class="scroll-vertical">
+            @foreach(var t in Model.Tareas){
+            if(t.Estado == EstadoTarea.Doing){
+                <div class="targeta m-3 p-3 bg-white rounded d-flex flex-wrap justify-content-between">
+                    <div class="d-flex justify-content-between w-100">
+                        <h3>@t.Nombre</h3>
+                        <img height="30px" width="60px" class="rounded" style="background-color: @t.Color;">
+                    </div>
+                    <a class="btn btn-outline-primary w-100 m-1" data-bs-toggle="modal" data-bs-target="#detalle-@t.Id">
+                    Ver mas
+                    </a>
+                    @if(Context.Session.GetString("User") == t.UsuarioAsignado){
+                        <a class="btn btn-outline-secondary m-1 EditDelete" asp-controller="Tarea" asp-action="ModificarTarea" asp-route-id="@t.Id">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                    }
+                    @if(Context.Session.GetString("User")==Model.Usuario_propietario){
+                        <a class="btn btn-outline-danger m-1 EditDelete" data-bs-toggle="modal" data-bs-target="#Tarea-@t.Id">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="Tarea-@t.Id" tabindex="-1" aria-labelledby="TareaLabel-@t.Id"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="TareaLabel-@t.Id">Eliminar Tablero</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>¿Desea eliminar a @t.Nombre?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <a class="btn  btn-outline-danger" asp-controller="Tarea" asp-action="EliminarTarea" asp-route-id="@t.Id">Confirmar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="modal fade" id="detalle-@t.Id" tabindex="-1" aria-labelledby="detalle-@t.Id" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color: @t.Color;">
+                                    <h1 class="modal-title fs-5 pe-2" id="detalle-@t.Id">@t.Nombre</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Propietario </strong>
+                                        <button class="btn btn-secondary w-100 d-flex flex-row justify-content-center align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img class="rounded-circle" src="~/img/@t.Imagen" alt="logo"
+                                                width="30px" height="30px">
+                                            <p class="text-white m-2">@t.UsuarioAsignado</p>
+                                        </button>
+                                    </p>
+                                    <p class="wrap"><strong>Descripcion</strong><br>@t.Descripcion</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        </div>
+    </article>
+    <article class="columnas mx-3 mb-3 bg-dark-subtle p-2 rounded">
+        <h2 class="text-center targeta">Review</h2>
+        <div class="scroll-vertical">
+            @foreach(var t in Model.Tareas){
+            if(t.Estado == EstadoTarea.Review){
+                <div class="targeta m-3 p-3 bg-white rounded d-flex flex-wrap justify-content-between">
+                    <div class="d-flex justify-content-between w-100">
+                        <h3>@t.Nombre</h3>
+                        <img height="30px" width="60px" class="rounded" style="background-color: @t.Color;">
+                    </div>
+                    <a class="btn btn-outline-primary w-100 m-1" data-bs-toggle="modal" data-bs-target="#detalle-@t.Id">
+                    Ver mas
+                    </a>
+                    @if(Context.Session.GetString("User") == t.UsuarioAsignado){
+                        <a class="btn btn-outline-secondary m-1 EditDelete" asp-controller="Tarea" asp-action="ModificarTarea" asp-route-id="@t.Id">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                    }
+                    @if(Context.Session.GetString("User")==Model.Usuario_propietario){
+                        <a class="btn btn-outline-danger m-1 EditDelete" data-bs-toggle="modal" data-bs-target="#Tarea-@t.Id">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="Tarea-@t.Id" tabindex="-1" aria-labelledby="TareaLabel-@t.Id"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="TareaLabel-@t.Id">Eliminar Tablero</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>¿Desea eliminar a @t.Nombre?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <a class="btn  btn-outline-danger" asp-controller="Tarea" asp-action="EliminarTarea" asp-route-id="@t.Id">Confirmar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="modal fade" id="detalle-@t.Id" tabindex="-1" aria-labelledby="detalle-@t.Id" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color: @t.Color;">
+                                    <h1 class="modal-title fs-5 pe-2" id="detalle-@t.Id">@t.Nombre</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Propietario </strong>
+                                        <button class="btn btn-secondary w-100 d-flex flex-row justify-content-center align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img class="rounded-circle" src="~/img/@t.Imagen" alt="logo"
+                                                width="30px" height="30px">
+                                            <p class="text-white m-2">@t.UsuarioAsignado</p>
+                                        </button>
+                                    </p>
+                                    <p class="wrap"><strong>Descripcion</strong><br>@t.Descripcion</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        </div>
+    </article>
+    <article class="columnas mx-3 mb-3 bg-dark-subtle p-2 rounded">
+        <h2 class="text-center targeta">Done</h2>
+        <div class="scroll-vertical">
+            @foreach(var t in Model.Tareas){
+            if(t.Estado == EstadoTarea.Done){
+                <div class="targeta m-3 p-3 bg-white rounded d-flex flex-wrap justify-content-between">
+                    <div class="d-flex justify-content-between w-100">
+                        <h3>@t.Nombre</h3>
+                        <img height="30px" width="60px" class="rounded" style="background-color: @t.Color;">
+                    </div>
+                    <a class="btn btn-outline-primary w-100 m-1" data-bs-toggle="modal" data-bs-target="#detalle-@t.Id">
+                    Ver mas
+                    </a>
+                    @if(Context.Session.GetString("User") == t.UsuarioAsignado){
+                        <a class="btn btn-outline-secondary m-1 EditDelete" asp-controller="Tarea" asp-action="ModificarTarea" asp-route-id="@t.Id">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                    }
+                    @if(Context.Session.GetString("User")==Model.Usuario_propietario){
+                        <a class="btn btn-outline-danger m-1 EditDelete" data-bs-toggle="modal" data-bs-target="#Tarea-@t.Id">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="Tarea-@t.Id" tabindex="-1" aria-labelledby="TareaLabel-@t.Id"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="TareaLabel-@t.Id">Eliminar Tablero</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>¿Desea eliminar a @t.Nombre?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <a class="btn  btn-outline-danger" asp-controller="Tarea" asp-action="EliminarTarea" asp-route-id="@t.Id">Confirmar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="modal fade" id="detalle-@t.Id" tabindex="-1" aria-labelledby="detalle-@t.Id" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color: @t.Color;">
+                                    <h1 class="modal-title fs-5 pe-2" id="detalle-@t.Id">@t.Nombre</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Propietario </strong>
+                                        <button class="btn btn-secondary w-100 d-flex flex-row justify-content-center align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img class="rounded-circle" src="~/img/@t.Imagen" alt="logo"
+                                                width="30px" height="30px">
+                                            <p class="text-white m-2">@t.UsuarioAsignado</p>
+                                        </button>
+                                    </p>
+                                    <p class="wrap"><strong>Descripcion</strong><br>@t.Descripcion</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        </div>
+    </article>
+</section>

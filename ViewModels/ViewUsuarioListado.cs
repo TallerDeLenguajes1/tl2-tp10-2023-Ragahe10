@@ -1,18 +1,15 @@
-namespace tl2_tp10_2023_Ragahe10.Models;
-using System.ComponentModel.DataAnnotations;
- 
+namespace Proyecto.ViewModels;
+using Proyecto.Models;
 public class ViewUsuarioListado{
-    private List<ViewUsuario> viewUsuarios;
-    public List<ViewUsuario> ViewUsuarios { get => viewUsuarios; set => viewUsuarios = value; }
-
     public ViewUsuarioListado(List<Usuario> usuarios)
     {
-        viewUsuarios = new List<ViewUsuario>();
-        foreach (var u in usuarios)
-        {
-            var viewUsuario = new ViewUsuario(u);
-            viewUsuarios.Add(viewUsuario);
+        ListaDeUsuarios = new List<ViewUsuarioInfo>();
+        foreach(var u in usuarios){
+            var usuarioInfo = new ViewUsuarioInfo(u);
+            ListaDeUsuarios.Add(usuarioInfo);
         }
     }
+
+    public List<ViewUsuarioInfo> ListaDeUsuarios{get;}
 
 }

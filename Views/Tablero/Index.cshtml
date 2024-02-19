@@ -3,32 +3,38 @@
 }
 @model ViewTableroListado
 
-<div class="text-center">
-    <h1 class="display-4">Tableros</h1>
-    <table class="table caption-top table-striped table-hover">
-        <thead>
-            <tr class="table-dark">
-                <th scope="col">ID</th>
-                <th scope="col">Propietario</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Descrpcion</th>
-                <th scope="col">Modificar</th>
-                <th scope="col">Borrar</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var t in Model.ViewTableros){
-                <tr>
-                    <th class="m-auto" scope="row">@t.Id</th>
-                    <th class="m-auto" scope="row">@t.UsuarioPropietario</th>
-                    <td class="m-auto col">@t.Nombre</td>
-                    <td class="m-auto col-6">@t.Descripcion</td>
-                    <td><a class="btn  btn-outline-primary" asp-controller="Tablero" asp-action="ModificarTablero" asp-route-id="@t.Id"><i class="bi bi-pencil-square"></i></a></td>
-                    <td>
-                        @* <a class="btn  btn-outline-danger" asp-controller="Tablero" asp-action="EliminarTablero" asp-route-idTablero="@u.Id" onclick="return confirm('¿Estas seguro que quieres eliminar a @u.NombreDeTablero?')"><i class="bi bi-trash"></i></a> *@
-
-                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@t.Id">
-                            <i class="bi bi-trash"></i>
+<div>
+    <h1 class="display-4 text-center">Tableros</h1>
+    <div class="scroll-horizontal">
+      <br><h3>Mis tableros: </h3><hr>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          @foreach(var t in Model.ListaDeTableros){
+            if(t.Usuario_propietario == Context.Session.GetString("User")){
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-@t.Id" aria-expanded="false" aria-controls="flush-collapse-@t.Id">
+                    @t.Nombre
+                  </button>
+                </h2>
+                <div id="flush-collapse-@t.Id" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <div>
+                      <p><strong>Propietario: </strong>@t.Usuario_propietario</p>
+                      <p><strong>Descrpcion:</strong><br>@t.Descripcion</p>
+                    </div>
+                    <hr>
+                    <div class="d-flex flex-wrap flex-row justify-content-end align-items-center">
+                      <a class="btn mx-1 btn-outline-success" asp-controller="Tablero" asp-action="VerTablero" asp-route-id="@t.Id">
+                        <i class="bi bi-search"></i> Ver Tablero
+                      </a>
+                      @if(Context.Session.GetString("User") == t.Usuario_propietario || (t.Usuario_propietario == "Sin Propietario" && Context.Session.GetString("Rol") == "Administrador")){
+                        <a class="btn mx-1 btn-outline-primary" asp-controller="Tablero" asp-action="ModificarTablero" asp-route-id="@t.Id">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                      }
+                      @if(Context.Session.GetString("User")==t.Usuario_propietario || Context.Session.GetString("Rol")=="Administrador"){
+                        <button type="button" class="btn mx-1 btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@t.Id">
+                            <i class="bi bi-trash"></i> Eliminar
                         </button>
 
                         <!-- Modal -->
@@ -51,10 +57,75 @@
                                 </div>
                             </div>
                         </div>
-                    </td>
-                </tr>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
             }
-        </tbody>
-    </table>
-    <a class="btn btn-outline-success fs-5 py-2 px-4" asp-area="" asp-controller="Tablero" asp-action="CrearTablero"><i class="bi bi-plus-lg"></i> Crear Tablero</a>
+          }
+        </div>
+        <br><h3>Otros tableros:</h3><hr>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          @foreach(var t in Model.ListaDeTableros){
+            if(t.Usuario_propietario != Context.Session.GetString("User")){
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-@t.Id" aria-expanded="false" aria-controls="flush-collapse-@t.Id">
+                    @t.Nombre
+                  </button>
+                </h2>
+                <div id="flush-collapse-@t.Id" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <div>
+                      <p><strong>Propietario: </strong>@t.Usuario_propietario</p>
+                      <p><strong>Descrpcion:</strong><br>@t.Descripcion</p>
+                    </div>
+                    <hr>
+                    <div class="d-flex flex-wrap flex-row justify-content-end align-items-center">
+                      <a class="btn mx-1 btn-outline-success" asp-controller="Tablero" asp-action="VerTablero" asp-route-id="@t.Id">
+                        <i class="bi bi-search"></i> Ver Tablero
+                      </a>
+                      @if(Context.Session.GetString("User") == t.Usuario_propietario || (t.Usuario_propietario == "Sin Propietario" && Context.Session.GetString("Rol") == "Administrador")){
+                        <a class="btn mx-1 btn-outline-primary" asp-controller="Tablero" asp-action="ModificarTablero" asp-route-id="@t.Id">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                      }
+                      @if(Context.Session.GetString("User")==t.Usuario_propietario || Context.Session.GetString("Rol")=="Administrador"){
+                        <button type="button" class="btn mx-1 btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@t.Id">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal-@t.Id" tabindex="-1" aria-labelledby="exampleModalLabel-@t.Id"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel-@t.Id">Eliminar Tablero</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>¿Desea eliminar a @t.Nombre?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <a class="btn  btn-outline-danger" asp-controller="Tablero" asp-action="EliminarTablero" asp-route-id="@t.Id">Confirmar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          }
+        </div>
+    </div>
+    <div class="text-center">
+      <a class="btn btn-outline-success fs-5 py-2 px-4 mx-auto" asp-area="" asp-controller="Tablero" asp-action="CrearTablero"><i class="bi bi-plus-lg"></i> Crear Tablero</a>
+    </div>
 </div>

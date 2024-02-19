@@ -1,4 +1,4 @@
-namespace tl2_tp10_2023_Ragahe10.Models;
+namespace Proyecto.Models;
 using System.ComponentModel.DataAnnotations;
 
 public class ViewTareaAdd{
@@ -15,24 +15,23 @@ public class ViewTareaAdd{
     [Required (ErrorMessage ="este campo es requerido")]
     public EstadoTarea Estado {get;set;}
     public int IdUsuarioAsignado {get;set;}
-    private List<Tablero> tableros;
     private List<Usuario> usuarios;
+    private List<Tablero> tableros;
 
     public ViewTareaAdd()
     {
     }
 
     public ViewTareaAdd(Tarea tarea, List<Tablero> tableros, List<Usuario> usuarios){
-        IdTablero = tarea.IdTablero;
+        IdTablero = tarea.Id_tablero;
         Nombre = tarea.Nombre;
         Descripcion = tarea.Descripcion;
         Color = tarea.Color;
         Estado = tarea.Estado;
-        IdUsuarioAsignado = tarea.IdUsuarioAsignado;
-        this.tableros = tableros;
+        IdUsuarioAsignado = tarea.Id_usuario_asignado;
         this.usuarios = usuarios;
+        this.tableros = tableros;
     }
-
-    public List<Tablero> Tableros { get => tableros; set => tableros = value; }
     public List<Usuario> Usuarios { get => usuarios; set => usuarios = value; }
+    public List<Tablero> Tableros { get => tableros; set => tableros = value; }
 }

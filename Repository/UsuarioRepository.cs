@@ -1,98 +1,144 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+namespace Proyecto.Repository;
 using System.Data.SQLite;
-namespace tl2_tp10_2023_Ragahe10.Models;
-
+using Proyecto.Models;
+using Proyecto.ViewModels;
 
 public class UsuarioRepository : IUsuarioRepository {
-    private string[] roles = {"Administrador", "Operador"};
-    private string cadenaConexion;
-
-    public UsuarioRepository(string CadenaConexion)
+    private string CadenaDeConexion;
+    private List<string> avateres = new List<string>{"p1.png","p2.png","p3.png","p4.png","p.png"};
+    public UsuarioRepository(string CadenaDeConexion)
     {
-        cadenaConexion = CadenaConexion;
+        this.CadenaDeConexion = CadenaDeConexion;
     }
-
     public void AddUsuario(Usuario usuario){
-        var query = @"INSERT INTO Usuario (nombre_de_usuario,rol,pass) VALUES (@nombre_de_usuario,@rol,@pass);";
-        using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
-            connection.Open();
+        var query = @"INSERT INTO Usuario (nombre_de_usuario, pass, rol, imagen) VALUES (@nombre_de_usuario, @pass, @rol, @imagen);";
+        using(SQLiteConnection connection = new SQLiteConnection(CadenaDeConexion)){
             var command = new SQLiteCommand(query,connection);
-            command.Parameters.Add(new SQLiteParameter("@nombre_de_usuario", usuario.NombreDeUsuario));
-            if(roles.FirstOrDefault(r => r==usuario.Rol)!=null){
-                command.Parameters.Add(new SQLiteParameter("@rol", usuario.Rol));
+            command.Parameters.Add(new SQLiteParameter("@nombre_de_usuario",usuario.Nombre_de_usuario));
+            command.Parameters.Add(new SQLiteParameter("@pass",usuario.Pass));
+            command.Parameters.Add(new SQLiteParameter("@rol","Operador"));
+            if(avateres.FirstOrDefault(a => a == usuario.Imagen)==null){
+                command.Parameters.Add(new SQLiteParameter("@imagen","sinImagen.png"));
             }else{
-                command.Parameters.Add(new SQLiteParameter("@rol","Operador"));
+                command.Parameters.Add(new SQLiteParameter("@imagen",usuario.Imagen));
             }
-            command.Parameters.Add(new SQLiteParameter("@pass", usuario.Pass));
+            connection.Open();
             command.ExecuteNonQuery();
             connection.Close();
         }
     }
-    public void UpdateUsuario(int idUsuario, Usuario usuario){
-        using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
-            SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = @"UPDATE Usuario SET nombre_de_usuario = @nombre, pass = @pass, rol = @rol WHERE id = @idUsuario;";
-            command.Parameters.Add(new SQLiteParameter("@nombre",usuario.NombreDeUsuario));
-            command.Parameters.Add(new SQLiteParameter("@pass",usuario.Pass));
-            if(roles.FirstOrDefault(r=> r==usuario.Rol)!=null){
-                command.Parameters.Add(new SQLiteParameter("@rol", usuario.Rol));
-            }else{
-                command.Parameters.Add(new SQLiteParameter("@rol","Operador"));
-            }
-            command.Parameters.Add(new SQLiteParameter("@idUsuario",idUsuario));
+    public Usuario GetUsuario(int id){
+        var query = @"SELECT * FROM Usuario WHERE id = @id;";
+        Usuario usuario = null;
+        using (SQLiteConnection connection = new SQLiteConnection(CadenaDeConexion)){
+            var command = new SQLiteCommand(query, connection);
+            command.Parameters.Add(new SQLiteParameter("@id",id));
             connection.Open();
-            command.ExecuteNonQuery();
+            using(SQLiteDataReader reader = command.ExecuteReader()){
+                while(reader.Read()){
+                    usuario = new Usuario(); 
+                    usuario.Id = Convert.ToInt32(reader["id"]);
+                    usuario.Nombre_de_usuario = reader["nombre_de_usuario"].ToString();
+                    usuario.Rol = reader["rol"].ToString();
+                    usuario.Pass = reader["pass"].ToString();
+                    usuario.Imagen = reader["imagen"].ToString();
+                }
+            }
             connection.Close();
         }
+        return usuario;
+    }
+    public Usuario GetUsuarioLogin(ViewUsuarioLogin user){
+        var query = @"SELECT * FROM Usuario WHERE nombre_de_usuario = @nombre_de_usuario AND pass = @pass;";
+        Usuario usuario = null;
+        using (SQLiteConnection connection = new SQLiteConnection(CadenaDeConexion)){
+            var command = new SQLiteCommand(query, connection);
+            command.Parameters.Add(new SQLiteParameter("@nombre_de_usuario",user.Name));
+            command.Parameters.Add(new SQLiteParameter("@pass",user.Pass));
+            connection.Open();
+            using(SQLiteDataReader reader = command.ExecuteReader()){
+                while(reader.Read()){
+                    usuario = new Usuario();
+                    usuario.Id = Convert.ToInt32(reader["id"]);
+                    usuario.Nombre_de_usuario = reader["nombre_de_usuario"].ToString();
+                    usuario.Rol = reader["rol"].ToString();
+                    usuario.Pass = reader["pass"].ToString();
+                    usuario.Imagen = reader["imagen"].ToString();
+                }
+            }
+            connection.Close();
+        }
+        return usuario;
     }
     public List<Usuario> GetAllUsuarios(){
         var query = @"SELECT * FROM Usuario;";
         List<Usuario> usuarios = new List<Usuario>();
-        using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
-            SQLiteCommand command = new SQLiteCommand(query,connection);
+        using (SQLiteConnection connection = new SQLiteConnection(CadenaDeConexion)){
+            var command = new SQLiteCommand(query, connection);
             connection.Open();
             using(SQLiteDataReader reader = command.ExecuteReader()){
                 while(reader.Read()){
                     var usuario = new Usuario();
                     usuario.Id = Convert.ToInt32(reader["id"]);
-                    usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
+                    usuario.Nombre_de_usuario = reader["nombre_de_usuario"].ToString();
                     usuario.Rol = reader["rol"].ToString();
                     usuario.Pass = reader["pass"].ToString();
+                    usuario.Imagen = reader["imagen"].ToString();
                     usuarios.Add(usuario);
-                }
-            }
-        }
-        if (usuarios==null)
-            throw new Exception("Usuarios no creados.");
-        return usuarios;
-    }
-    public Usuario GetUsuario(int idUsuario){
-        var query = @"SELECT * FROM Usuario WHERE id = @idUsuario;";
-        Usuario usuario = new Usuario();
-        using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
-            SQLiteCommand command = new SQLiteCommand(query,connection);
-            command.Parameters.Add(new SQLiteParameter("@idUsuario",idUsuario));
-            connection.Open();
-            using(SQLiteDataReader reader = command.ExecuteReader()){
-                while(reader.Read()){
-                    usuario.Id = Convert.ToInt32(reader["id"]);
-                    usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
                 }
             }
             connection.Close();
         }
-        if (usuario==null)
-            throw new Exception("Usuario no creado.");
-        return usuario;
+        return usuarios;
     }
-    public void DeleteUsuario(int idUsuario){
-        using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
-            SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = @"DELETE FROM Usuario WHERE id = @idUsuario;";
-            command.Parameters.Add(new SQLiteParameter("@idUsuario",idUsuario));
+    public void UpdateUsuario(int id, ViewUsuarioUpdate viewUsuario){
+        var query = @"UPDATE Usuario SET pass = @pass, imagen = @imagen WHERE id = @id;";
+        using(SQLiteConnection connection = new SQLiteConnection(CadenaDeConexion)){
+            var command = new SQLiteCommand(query,connection);
+            command.Parameters.Add(new SQLiteParameter("@pass",viewUsuario.NewPass));
+            command.Parameters.Add(new SQLiteParameter("@imagen",viewUsuario.Imagen));
+            command.Parameters.Add(new SQLiteParameter("@id",id));
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+    }
+    public void UpdateUsuarioRol(int id, string rol){
+        var query = @"UPDATE Usuario SET rol = @rol WHERE id = @id;";
+        using(SQLiteConnection connection = new SQLiteConnection(CadenaDeConexion)){
+            var command = new SQLiteCommand(query,connection);
+            command.Parameters.Add(new SQLiteParameter("@rol",rol));
+            command.Parameters.Add(new SQLiteParameter("@id",id));
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+    }
+    public bool Existe(string nombre){
+        var query = @"SELECT * FROM Usuario WHERE nombre_de_usuario = @nombre_de_usuario;";
+        Usuario usuario = null;
+        using (SQLiteConnection connection = new SQLiteConnection(CadenaDeConexion)){
+            var command = new SQLiteCommand(query, connection);
+            command.Parameters.Add(new SQLiteParameter("@nombre_de_usuario",nombre));
+            connection.Open();
+            using(SQLiteDataReader reader = command.ExecuteReader()){
+                while(reader.Read()){
+                    usuario = new Usuario();
+                    usuario.Id = Convert.ToInt32(reader["id"]);
+                    usuario.Nombre_de_usuario = reader["nombre_de_usuario"].ToString();
+                    usuario.Rol = reader["rol"].ToString();
+                    usuario.Pass = reader["pass"].ToString();
+                }
+            }
+            connection.Close();
+        }
+        return usuario!=null;
+    }
+    public void DeleteUsuario(int id){
+        var query = @"DELETE FROM Usuario WHERE id = @id;";
+        using(SQLiteConnection connection = new SQLiteConnection(CadenaDeConexion)){
+            var command = new SQLiteCommand(query,connection);
+            command.Parameters.Add(new SQLiteParameter("@id", id));
             connection.Open();
             command.ExecuteNonQuery();
             connection.Close();

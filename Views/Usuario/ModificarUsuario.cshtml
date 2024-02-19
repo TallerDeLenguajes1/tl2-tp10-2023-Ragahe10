@@ -5,31 +5,111 @@
 
 <div class="text-center d-flex flex-column align-items-center">
     <h1 class="text-dark">Modificar Usuario</h1>
-    <form class="w-50 my-2 p-4 border border-3 border-dark rounded-2 border-opacity-25" asp-controller="Usuario" asp-action="ModificarUsuario">
-        <legend>@Model.Id - @Model.NombreDeUsuario</legend>
+    <form class="my-2 p-4 border border-3 border-dark rounded-2 border-opacity-25" asp-controller="Usuario" asp-action="ModificarUsuario">
+        <legend>@Model.Id - @Model.Nombre_de_usuario</legend>
         <fieldset>
-            <input hidden asp-for="@Model.Id">
             <div class="mb-3 form-floating">
-                <div class="mb-3 form-floating">
-                    <input type="text" class="form-control" asp-for="@Model.NombreDeUsuario" aria-describedby="emailHelp" placeholder="Nombre de usuario">
-                    <label asp-for="@Model.NombreDeUsuario" class="form-label text-center">Nombre de Usuario</label>
-                    <span asp-validation-for="@Model.NombreDeUsuario" class="text-danger"></span>
+                <input hidden asp-for="@Model.Id">
+                <input hidden asp-for="@Model.Nombre_de_usuario">
+                <div class="d-flex flex-column align-items-center my-2">
+                    <legend>Avatar</legend>
+                    <input asp-for="@Model.Imagen" id="selectedGender" readonly hidden>
+                    <div class="d-flex flex-row flew-wrap">
+                        <div class="d-flex flex-column m-2">
+                            <input type="radio" name="flexRadioDefault" value="sinImagen.png" id="sinImagen" checked>
+                            <label for="sinImagen">
+                                <img src="~/img/sinImagen.png" height="40px" width="40px">
+                            </label>
+                        </div>
+                        <div class="d-flex flex-column m-2">
+                            <input type="radio" name="flexRadioDefault" value="p1.png" id="p1">
+                            <label for="p1">
+                                <img src="~/img/p1.png" height="40px" width="40px">
+                            </label>
+                        </div>
+                        <div class="d-flex flex-column m-2">
+                            <input type="radio" name="flexRadioDefault" value="p2.png" id="p2">
+                            <label for="p2">
+                                <img src="~/img/p2.png" height="40px" width="40px">
+                            </label>
+                        </div>
+                        <div class="d-flex flex-column m-2">
+                            <input type="radio" name="flexRadioDefault" value="p3.png" id="p3">
+                            <label for="p3">
+                                <img src="~/img/p3.png" height="40px" width="40px">
+                            </label>
+                        </div>
+                        <div class="d-flex flex-column m-2">
+                            <input type="radio" name="flexRadioDefault" value="p4.png" id="p4">
+                            <label for="p4">
+                                <img src="~/img/p4.png" height="40px" width="40px">
+                            </label>
+                        </div>
+                        <div class="d-flex flex-column m-2">
+                            <input type="radio" name="flexRadioDefault" value="p5.png" id="p5">
+                            <label for="p5">
+                                <img src="~/img/p5.png" height="40px" width="40px">
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="mb-3 form-floating">
                     <input type="password" class="form-control" asp-for="@Model.Pass" aria-describedby="emailHelp" placeholder="Contraseña">
-                    <label asp-for="@Model.Pass" class="form-label text-center">Contraseña</label>
+                    <label asp-for="@Model.Pass" class="form-label text-center">Contraseña anterior</label>
                     <span asp-validation-for="@Model.Pass" class="text-danger"></span>
                 </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.Rol" class="form-label text-center">Rol</label>
-                    <select asp-for="@Model.Rol" class="form-select" aria-label="Default select example" >
-                        <option value="Operador" selected>Operador</option>
-                        <option value="Administrador">Administrador</option>
-                    </select>
+                <div class="mb-3 form-floating">
+                    <input type="password" class="form-control" asp-for="@Model.NewPass" aria-describedby="emailHelp" placeholder="Contraseña">
+                    <label asp-for="@Model.NewPass" class="form-label text-center">Contraseña nueva</label>
+                    <span asp-validation-for="@Model.NewPass" class="text-danger"></span>
                 </div>
             </div>
-            <button type="submit" class="btn  btn-outline-primary">Cargar</button>
+            <button type="submit" class="btn  btn-outline-primary">Aceptar</button>
         </fieldset>
     </form>
 </div>
+<script>
+    var sinImagen = document.getElementById('sinImagen');
+    var p1 = document.getElementById('p1');
+    var p2 = document.getElementById('p2');
+    var p3 = document.getElementById('p3');
+    var p4 = document.getElementById('p4');
+    var p5 = document.getElementById('p5');
+    var selectedGenderInput = document.getElementById('selectedGender');
+
+
+    sinImagen.addEventListener('change', Avatar, false);
+    p1.addEventListener('change', Avatar, false);
+    p2.addEventListener('change', Avatar, false);
+    p3.addEventListener('change', Avatar, false);
+    p4.addEventListener('change', Avatar, false);
+    p5.addEventListener('change', Avatar, false);
+
+
+    function Avatar() {
+        switch(true){
+            case sinImagen.checked:
+                selectedGenderInput.value = sinImagen.value;
+                break;
+            case p1.checked:
+                selectedGenderInput.value = p1.value;
+                break;
+            case p2.checked:
+                selectedGenderInput.value = p2.value;
+                break;
+            case p3.checked:
+                selectedGenderInput.value = p3.value;
+                break;
+            case p4.checked:
+                selectedGenderInput.value = p4.value;
+                break;
+            case p5.checked:
+                selectedGenderInput.value = p5.value;
+                break;
+        }
+        console.log(selectedGenderInput.value);
+    }
+
+    updateSelectedGender();
+</script>
 @section Scripts{<partial name="_ValidationScriptsPartial"/>}

@@ -20,3 +20,23 @@ html {
 body {
   margin-bottom: 60px;
 }
+.targeta{
+  width: 280px !important;
+}
+.cont-columnas{
+  height: 75vh;
+}
+.scroll-horizontal {
+  overflow-x: auto;
+  white-space: nowrap; /* Evita el salto de línea */
+}
+.wrap{
+  white-space: wrap !important;
+}
+.scroll-vertical {
+  max-height: 90%; /* Altura máxima del contenedor */
+  overflow-y: auto; /* Habilita el scroll vertical cuando el contenido excede la altura máxima */
+}
+.EditDelete{
+  width: 46%;
+}

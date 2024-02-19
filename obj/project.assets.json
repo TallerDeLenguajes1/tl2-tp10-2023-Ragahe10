@@ -1968,9 +1968,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\tl2-tp10-2023-Ragahe10.csproj",
-      "projectName": "tl2-tp10-2023-Ragahe10",
-      "projectPath": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\tl2-tp10-2023-Ragahe10.csproj",
+      "projectUniqueName": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\Proyecto.csproj",
+      "projectName": "Proyecto",
+      "projectPath": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\Proyecto.csproj",
       "packagesPath": "C:\\Users\\educacion\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\obj\\",
       "projectStyle": "PackageReference",

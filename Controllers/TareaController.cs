@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
-using System.Formats.Tar;
 using Microsoft.AspNetCore.Mvc;
-using tl2_tp10_2023_Ragahe10.Models;
+using Proyecto.Models;
+using Proyecto.Repository;
+using Proyecto.ViewModels;
 
-namespace tl2_tp10_2023_Ragahe10.Controllers;
+namespace Proyecto.Controllers;
 
 public class TareaController : Controller
 {
@@ -26,26 +27,28 @@ public class TareaController : Controller
         try{
             if(HttpContext.Session.GetString("Rol")==null){
                 return RedirectToRoute(new{controller = "Login", action = "Index"});
-            }else if(isAdmin()){
-                ViewTareaListado tareas = new ViewTareaListado(_tareaRepository.GetAllTareas(),_usuarioRepository.GetAllUsuarios(),_tableroRepository.GetAllTableros());
-                return View(tareas);
             }else{
-                ViewTareaListado tareas = new ViewTareaListado(_tareaRepository.GetAllTareas().FindAll(t => t.IdUsuarioAsignado ==  HttpContext.Session.GetInt32("id")),_usuarioRepository.GetAllUsuarios(),_tableroRepository.GetAllTableros());
-                return View("TareaOperador",tareas);
+                ViewTareaListado listTareas = new ViewTareaListado(_tareaRepository.GetAllTareasView());
+                return View(listTareas);
             }
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
             return RedirectToAction("Error");
         }
     }
-
     [HttpGet]
     public IActionResult CrearTarea()
     {
         try{
-            if(isAdmin()){
-                return View(new ViewTareaAdd(new Tarea(),_tableroRepository.GetAllTableros(), _usuarioRepository.GetAllUsuarios()));
-                //return View(new Tarea());
+
+            if(HttpContext.Session.GetString("User")!=null){
+                var id_usuario = (int)HttpContext.Session.GetInt32("Id");
+                var tableros = _tableroRepository.GetAllTablerosForUser(id_usuario);
+                if(tableros.Count()>0){
+                    return View(new ViewTareaAdd(new Tarea(),tableros, _usuarioRepository.GetAllUsuarios()));
+                }else{
+                    return View("ErrorDeCreacion");
+                }
             }
             return RedirectToRoute(new{controller = "Login", action = "Index"});
         }catch (Exception ex){
@@ -59,58 +62,15 @@ public class TareaController : Controller
         try{
             if(ModelState.IsValid){
                 var tarea = new Tarea(t);
-                if(isAdmin()){
+                if(HttpContext.Session.GetString("User")==null) return RedirectToRoute(new{controller = "Login", action = "Index"});
+                var usuarios = _usuarioRepository.GetAllUsuarios();
+                var coinsidencia = usuarios.FirstOrDefault(u=> u.Id == tarea.Id_usuario_asignado);
+                if(_tableroRepository.GetTablero(tarea.Id_tablero)!=null && coinsidencia!=null){
                     _tareaRepository.AddTarea(tarea);
-                    return RedirectToAction("Index");
                 }
-                return RedirectToRoute(new{controller = "Login", action = "Index"});
+                return RedirectToAction("Index");      
             }
             return RedirectToAction("CrearTarea");
-        }catch (Exception ex){
-            _logger.LogError(ex.ToString());
-            return RedirectToAction("Error");
-        }
-    }
-    [HttpGet]
-    public IActionResult ModificarTarea(int id)
-    {
-        try{
-            var tarea = _tareaRepository.GetAllTareas().FirstOrDefault(t => t.Id == id);
-            if(HttpContext.Session.GetString("Rol")==null){
-                return RedirectToRoute(new{controller = "Login", action = "Index"});
-            }else if(isAdmin()){
-                return View(new ViewTareaUpdate(tarea,_tableroRepository.GetAllTableros(), _usuarioRepository.GetAllUsuarios()));
-            }else{
-                if(HttpContext.Session.GetInt32("id")==tarea.IdUsuarioAsignado){
-                    return View("ModificarTareaOperador",new ViewTareaUpdate(tarea,_tableroRepository.GetAllTableros(), _usuarioRepository.GetAllUsuarios()));
-                    //return RedirectToAction("ModificarUsuario",usuario);
-                }else{
-                    return RedirectToAction("Index");
-                }
-            }
-        }catch (Exception ex){
-            _logger.LogError(ex.ToString());
-            return RedirectToAction("Error");
-        }
-    }
-    [HttpPost]
-    public IActionResult ModificarTarea(int id, ViewTareaUpdate t)
-    {   
-        try{
-            if(ModelState.IsValid){
-                Tarea tarea = new Tarea(t);
-                if(HttpContext.Session.GetString("Rol")==null){
-                    return RedirectToRoute(new{controller = "Login", action = "Index"});
-                }else if(isAdmin()){
-                    _tareaRepository.UpdateTarea(id,tarea);
-                }else{
-                    if(HttpContext.Session.GetInt32("id")==id){
-                        _tareaRepository.UpdateTarea(id,tarea);
-                    }
-                }
-                return RedirectToAction("Index");
-            }
-            return RedirectToAction("ModificarTarea");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
             return RedirectToAction("Error");
@@ -125,7 +85,7 @@ public class TareaController : Controller
                     _tareaRepository.DeleteTarea(id);
             }else{
                 var tarea = _tareaRepository.GetTarea(id);
-                if(tarea!=null && HttpContext.Session.GetInt32("id")==tarea.IdUsuarioAsignado){
+                if(tarea!=null && HttpContext.Session.GetInt32("id")==tarea.Id_usuario_asignado){
                     _tareaRepository.DeleteTarea(id);
                 }
             }
@@ -135,14 +95,53 @@ public class TareaController : Controller
             return RedirectToAction("Error");
         }
     }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    [HttpGet]
+    public IActionResult ModificarTarea(int id)
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        try{
+            var tarea = _tareaRepository.GetAllTareas().FirstOrDefault(t => t.Id == id);
+            if(HttpContext.Session.GetString("Rol")==null){
+                return RedirectToRoute(new{controller = "Login", action = "Index"});
+            }
+            if(esPropietario(id)){
+                return View(new ViewTareaUpdate(tarea));
+            }
+            return RedirectToAction("Index");
+        }catch (Exception ex){
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+    [HttpPost]
+    public IActionResult ModificarTarea(int id, ViewTareaUpdate t)
+    {   
+        try{
+            if(ModelState.IsValid){
+                if(HttpContext.Session.GetString("Rol")==null)return RedirectToRoute(new{controller = "Login", action = "Index"});
+                var tarea = _tareaRepository.GetTarea(id);
+                if(t.Estado == EstadoTarea.Ideas || t.Estado == EstadoTarea.Review || t.Estado == EstadoTarea.Doing || t.Estado == EstadoTarea.Done || t.Estado == EstadoTarea.ToDo){
+                    tarea.Estado = t.Estado;   
+                    if(esPropietario(tarea.Id)){
+                        _tareaRepository.UpdateTarea(id,tarea);
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("ModificarTarea",id);
+        }catch (Exception ex){
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
     }
     private bool isAdmin(){
-        if(HttpContext.Session != null && HttpContext.Session.GetString("Rol") == "Administrador"){
+        if(HttpContext.Session.GetString("Rol") == "Administrador"){
+            return true;
+        }
+        return false;
+    }
+    private bool esPropietario(int id){
+        var tarea = _tareaRepository.GetTarea(id);
+        if(tarea != null && tarea.Id_usuario_asignado == HttpContext.Session.GetInt32("Id")){
             return true;
         }
         return false;

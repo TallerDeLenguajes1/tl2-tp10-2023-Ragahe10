@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\tl2-tp10-2023-Ragahe10.props" />
-</Project>

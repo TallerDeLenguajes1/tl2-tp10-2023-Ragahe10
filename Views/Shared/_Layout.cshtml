@@ -1,12 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var tableros = Context.Session.GetObjectFromJson<List<ViewTableroNav>>("Tableros");
+}
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/tl2_tp10_2023_Ragahe10.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Proyecto.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>
@@ -22,19 +26,50 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1 text-light">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Usuario" asp-action="Index"><i class="bi bi-people-fill"></i> Usuario</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Tablero" asp-action="Index"><i class="bi bi-table"></i> Tablero</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Tarea" asp-action="Index"><i class="bi bi-journals"></i> Tarea</a>
-                        </li>
+                    <ul class="navbar-nav text-light">
+                    @if(Context.Session.GetString("Rol")!=null){//verifica que se haya iniciado sesion
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Usuario" asp-action="Index"><i class="bi bi-people-fill"></i> Usuarios</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-table"></i> Tableros
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    @foreach(var t in tableros){
+                                        <li><a class="dropdown-item"  asp-controller="Tablero" asp-action="VerTablero" asp-route-id="@t.Id">@t.Nombre</a></li>
+                                    }
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Tablero" asp-action="Index">Ver todos</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Tarea" asp-action="Index"><i class="bi bi-journals"></i> Tareas</a>
+                            </li>
+                    }
                     </ul>
-                    <div>
-                        <a class="btn btn-outline-success me-2" asp-controller="Login" asp-action="Index"><i class="bi bi-door-open"></i> Loguearse</a>
+                    <div class="d-flex justify-content-around align-items-center">
+                        @if(Context.Session.GetString("Rol")!=null){
+                            <div class="dropdown">
+                                <button
+                                    class="btn btn-dark d-flex flex-row justify-content-center align-items-center dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img class="rounded-circle" src="~/img/@Context.Session.GetString("Imagen")" alt="logo"
+                                        width="30px" height="30px">
+                                    <p class="text-white m-2">@Context.Session.GetString("User")</p>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li class="dropdown-item">
+                                        <a class="btn btn-outline-danger " asp-controller="Login" asp-action="LogOut"><i class="bi bi-door-closed"></i> Log Out</a>
+                                        <a title="Modificar" class="btn btn-outline-primary" asp-controller="Usuario" asp-action="ModificarUsuario"
+                                        asp-route-id="@Context.Session.GetInt32("Id")"><i class="bi bi-pencil-square"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }else{
+                            <a class="btn btn-outline-secondary me-2" asp-controller="Usuario" asp-action="CrearUsuario"><i class="bi bi-person-plus"></i> Sig Up</a>
+                            <a class="btn btn-outline-success me-2" asp-controller="Login" asp-action="Index"><i class="bi bi-door-open"></i> Log In</a>
+                        }
                     </div>
                 </div>
             </div>
@@ -46,14 +81,14 @@
         </main>
     </div>
 
-    <footer class="border-top footer bg-dark text-white text-center py-4 fixed-bottom">
+    <footer class="border-top bg-dark text-white text-center py-4">
         <div class="container">
-            &copy; 2023 - Herrera Ramiro Gabriel - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - Herrera Ramiro Gabriel -</a>
         </div>
     </footer>
     <div class="d-none">
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         @await RenderSectionAsync("Scripts", required: false)
     </div>

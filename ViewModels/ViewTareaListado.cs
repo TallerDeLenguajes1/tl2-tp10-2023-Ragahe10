@@ -1,14 +1,9 @@
-namespace tl2_tp10_2023_Ragahe10.Models;
-
+namespace Proyecto.ViewModels;
+using Proyecto.Models;
 public class ViewTareaListado{
-    private List<ViewTarea> vTareas;
-    public List<ViewTarea> VTareas { get => vTareas; set => vTareas = value; }
-    public ViewTareaListado(List<Tarea> tareas, List<Usuario> usuarios, List<Tablero> tableros){
-        vTareas = new List<ViewTarea>();
-        foreach(var tarea in tareas){
-            var usuario = usuarios.FirstOrDefault(u => u.Id == tarea.IdUsuarioAsignado);
-            var tablero = tableros.FirstOrDefault(t => t.Id == tarea.IdTablero);
-            vTareas.Add(new ViewTarea(tarea,usuario,tablero));
-        }
+    private List<ViewTarea> tareas;
+    public List<ViewTarea> Tareas { get => tareas; set => tareas = value; }
+    public ViewTareaListado(List<ViewTarea> tareas){
+        this.tareas = tareas;
     }
 }

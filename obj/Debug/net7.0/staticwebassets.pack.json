@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\tl2-tp10-2023-Ragahe10.bundle.scp.css",
-      "PackagePath": "staticwebassets\\tl2-tp10-2023-Ragahe10.bundle.scp.css"
+      "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Proyecto.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Proyecto.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\css\\site.css",
@@ -17,8 +17,32 @@
       "PackagePath": "staticwebassets\\img\\logo.png"
     },
     {
+      "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\img\\p1.png",
+      "PackagePath": "staticwebassets\\img\\p1.png"
+    },
+    {
+      "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\img\\p2.png",
+      "PackagePath": "staticwebassets\\img\\p2.png"
+    },
+    {
+      "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\img\\p3.png",
+      "PackagePath": "staticwebassets\\img\\p3.png"
+    },
+    {
+      "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\img\\p4.png",
+      "PackagePath": "staticwebassets\\img\\p4.png"
+    },
+    {
+      "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\img\\p5.png",
+      "PackagePath": "staticwebassets\\img\\p5.png"
+    },
+    {
       "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\img\\ramiro.jpg",
       "PackagePath": "staticwebassets\\img\\ramiro.jpg"
+    },
+    {
+      "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\img\\sinImagen.png",
+      "PackagePath": "staticwebassets\\img\\sinImagen.png"
     },
     {
       "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\js\\site.js",
@@ -253,20 +277,20 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.tl2-tp10-2023-Ragahe10.props",
-      "PackagePath": "build\\tl2-tp10-2023-Ragahe10.props"
-    },
-    {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.tl2-tp10-2023-Ragahe10.props",
-      "PackagePath": "buildMultiTargeting\\tl2-tp10-2023-Ragahe10.props"
-    },
-    {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.tl2-tp10-2023-Ragahe10.props",
-      "PackagePath": "buildTransitive\\tl2-tp10-2023-Ragahe10.props"
-    },
-    {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.tl2-tp10-2023-Ragahe10.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.Proyecto.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.Proyecto.props",
+      "PackagePath": "build\\Proyecto.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.Proyecto.props",
+      "PackagePath": "buildMultiTargeting\\Proyecto.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.Proyecto.props",
+      "PackagePath": "buildTransitive\\Proyecto.props"
     }
   ],
   "ElementsToRemove": []
