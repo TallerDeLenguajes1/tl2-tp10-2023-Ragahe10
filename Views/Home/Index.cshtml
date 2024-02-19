@@ -1,8 +1,121 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mt-5">
+    <h1 class="text-center">Kanban</h1>
+    <img src="~/img/kanban.jpg" alt="kanban" width="340px" class="mt-5">
+    <h3 class="text-center">- Optimizando la Gestión de Proyectos -</h3>
+    <hr>   
+</div>
+<div class="d-flex">
+    <aside class=" w-25 p-2 position-relative me-5">
+        <nav class="navbar p-4 rounded bg-dark position-sticky" data-bs-theme="dark">
+            <a href="#" class="navbar-brand"><h4 class="text-light">Agenda</h4></a>
+            <div class="container-fluid">
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#Kanban">¿Qué es Kanban?</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#Origen">Origen y principios fundamentales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#Beneficios">Beneficios de Kanban</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#Implementacion">Implementación de Kanban</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#Ejemplos">Ejemplos prácticos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#Conclusiones">Conclusiones</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </aside>
+    <section class=" px-4 d-flex flex-column align-items-strech">
+        <br class="my-5" id="Kanban">
+        <hr class="mb-5">
+        <article>
+            <h3>¿Qué es Kanban?</h3>
+            <ul>
+                <li>Sistema de gestión visual</li>
+                <li>Origen en la industria automotriz (Toyota)</li>
+                <li>Significa "tarjeta visual" en japonés</li>
+                <li>Utiliza tarjetas o señales para representar el flujo de trabajo</li>
+            </ul>
+        </article>
+        <br class="my-5" id="Origen">
+        <hr class="mb-5">
+        <article>
+            <h3>Origen y Principios Fundamentales</h3>
+            <h4>Principios clave de Kanban:</h4>
+            <ol>
+                <li>Visualizar el trabajo</li>
+                <li>Limitar el trabajo en curso</li>
+                <li>Medir el tiempo de ciclo</li>
+                <li>Hacer políticas de proceso explícitas</li>
+                <li>Mejorar de forma colaborativa</li>
+            </ol>
+        </article>
+        <br class="my-5" id="Beneficios">
+        <hr class="mb-5">
+        <article>
+            <h3>Beneficios de Kanban</h3>
+            <ul>
+                <li>Mejora la visibilidad del flujo de trabajo</li>
+                <li>Reduce el tiempo de ciclo y los tiempos de espera</li>
+                <li>Facilita la detección temprana de cuellos de botella</li>
+                <li>Aumenta la flexibilidad y la capacidad de respuesta</li>
+                <li>Fomenta la colaboración y la transparencia</li>
+            </ul>
+        </article>
+        <br class="my-5" id="Implementacion">
+        <hr class="mb-5">
+        <article>
+            <h3>Implementación de Kanban</h3>
+            <ol>
+                <li>Visualizar el flujo de trabajo actual</li>
+                <li>Limitar el trabajo en curso (WIP)</li>
+                <li>Establecer políticas de proceso</li>
+                <li>Gestionar el flujo</li>
+                <li>Mejorar de forma continua</li>
+            </ol>
+        </article>
+        <br class="my-5" id="Ejemplos">
+        <hr class="mb-5">
+        <article>
+            <h3>Ejemplos Prácticos</h3>
+            <h4>Tablero Kanban:</h4>
+            <ul>
+                <li>Tareas por hacer</li>
+                <li>Tareas en progreso</li>
+                <li>Tareas completadas</li>
+            </ul>
+            <h4>Ejemplo de tarjeta Kanban:</h4>
+            <ul>
+                <li>Título de la tarea</li>
+                <li>Descripción</li>
+                <li>Responsable</li>
+                <li>Fecha límite</li>
+                <li>Estado</li>
+            </ul>
+        </article>
+        <br class="my-5" id="Conclusiones">
+        <hr class="mb-5">
+        <article>
+            <h3>Conclusiones</h3>
+            <ul>
+                <li>Kanban es una herramienta poderosa para la gestión de proyectos</li>
+                <li>Implementación gradual y adaptativa</li>
+            </ul>
+        </article>
+        <br class="my-5">
+        <hr class="mb-5">
+    </section>
 </div>
