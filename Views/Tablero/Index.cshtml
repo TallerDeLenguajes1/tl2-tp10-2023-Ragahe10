@@ -3,7 +3,7 @@
 }
 @model ViewTableroListado
 
-<div>
+<div class="px-3">
     <h1 class="display-4 text-center">Tableros</h1>
     <div class="scroll-horizontal">
       <br><h3>Mis tableros: </h3><hr>
@@ -66,7 +66,7 @@
           }
         </div>
         <br><h3>Otros tableros:</h3><hr>
-        <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion accordion-flush" id="accordionFlushExample2">
           @foreach(var t in Model.ListaDeTableros){
             if(t.Usuario_propietario != Context.Session.GetString("User")){
               <div class="accordion-item">
@@ -75,7 +75,7 @@
                     @t.Nombre
                   </button>
                 </h2>
-                <div id="flush-collapse-@t.Id" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div id="flush-collapse-@t.Id" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample2">
                   <div class="accordion-body">
                     <div>
                       <p><strong>Propietario: </strong>@t.Usuario_propietario</p>

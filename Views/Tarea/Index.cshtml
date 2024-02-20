@@ -3,10 +3,10 @@
 }
 @model ViewTareaListado
 
-<div>
+<div class="px-3">
     <h1 class="display-4 text-center">Tareas</h1>
     <div class="scroll-horizontal">
-      <br><h3>Mis tareas: </h3><hr>
+      <br><h3>Mis tareas:</h3><hr>
         <div class="accordion accordion-flush" id="accordionFlushExample">
           @foreach(var t in Model.Tareas){
             if(t.Usuario_asignado == Context.Session.GetString("User")){
@@ -72,7 +72,7 @@
           }
         </div>
         <br><h3>Otras tareas:</h3><hr>
-        <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion accordion-flush" id="accordionFlush2">
           @foreach(var t in Model.Tareas){
             if(t.Usuario_asignado != Context.Session.GetString("User")){
               <div class="accordion-item">
@@ -81,7 +81,7 @@
                     @t.Nombre
                   </button>
                 </h2>
-                <div id="flush-collapse-@t.Id" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div id="flush-collapse-@t.Id" class="accordion-collapse collapse" data-bs-parent="#accordionFlush2">
                   <div class="accordion-body">
                     <div>
                       <p><strong>Propietario: </strong>
