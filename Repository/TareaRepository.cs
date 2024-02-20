@@ -131,7 +131,7 @@ public class TareaRepository : ITareaRepository{
         return tareas;
     }
     public List<ViewTarea> GetAllTareasView(){
-        var query = @"SELECT t.id, t.nombre, t.descripcion, color, estado, u.nombre_de_usuario AS usuario_asignado, u.imagen, tl.id AS id_tablero, tl.nombre AS tablero FROM Tarea t LEFT JOIN Usuario u ON (t.id_usuario_asignado = u.id) INNER JOIN Tablero tl ON (t.id_tablero = tl.id);";
+        var query = @"SELECT t.id, t.nombre, t.descripcion, color, estado, u.nombre_de_usuario AS usuario_asignado, u.imagen, tl.id AS id_tablero, tl.nombre AS tablero, us.id as propietario_tablero FROM Tarea t LEFT JOIN Usuario u ON (t.id_usuario_asignado = u.id) INNER JOIN Tablero tl ON (t.id_tablero = tl.id) INNER JOIN Usuario us ON (tl.id_usuario_propietario = us.id);";
         List<ViewTarea> tareas = new List<ViewTarea>();
         using (SQLiteConnection connection = new SQLiteConnection(CadenaDeConexion)){
             var command = new SQLiteCommand(query, connection);
@@ -160,6 +160,7 @@ public class TareaRepository : ITareaRepository{
                     }
                     tarea.Tablero = reader["tablero"].ToString();
                     tarea.Id_tablero = Convert.ToInt32(reader["id_tablero"]);
+                    tarea.Propietario_tablero = Convert.ToInt32(reader["propietario_tablero"]);
 
                     tareas.Add(tarea);
                 }

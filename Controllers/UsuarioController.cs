@@ -130,6 +130,10 @@ public class UsuarioController : Controller
     public IActionResult EliminarUsuario(int id){
         try{
             if(isAdmin() || HttpContext.Session.GetInt32("id") == id){
+                if(isAdmin() && _usuarioRepository.GetCountUsuarioAdmin()==1){
+                    TempData["AlertMessage"] = "No se puede eliminar el unico administrador.";
+                    return RedirectToAction("Index");
+                }
                 var Tableros = _tableroRepository.GetAllTablerosForUser(id);
                 foreach (var t in Tableros)
                 {

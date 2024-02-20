@@ -61,61 +61,10 @@
             </div>
         }
     </div>
-    @* <table class="table caption-top table-striped table-hover">
-        <thead>
-            <tr class="table-dark">
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Rol</th>
-                <th scope="col">Modificar</th>
-                <th scope="col">Borrar</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var u in Model.ListaDeUsuarios){
-                <tr>
-                    <th class="m-auto" scope="row">@u.Id</th>
-                    <td class="m-auto col-4">@u.Nombre_de_usuario</td>
-                    <td class="m-auto">@u.Rol</td>
-                    <td>
-                    @if(Context.Session.GetInt32("Id")==u.Id || Context.Session.GetString("Rol")=="Administrador"){
-                        <a class="btn  btn-outline-primary" asp-controller="Usuario" asp-action="ModificarUsuario"
-                                asp-route-id="@u.Id"><i class="bi bi-pencil-square"></i></a>
-                    }
-                    </td>
-                    <td>
-                    @if(Context.Session.GetInt32("Id")==u.Id || Context.Session.GetString("Rol")=="Administrador"){
-                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal-@u.Id">
-                            <i class="bi bi-trash"></i>
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal-@u.Id" tabindex="-1"
-                            aria-labelledby="exampleModalLabel-@u.Id" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel-@u.Id">Eliminar Usuario</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>¿Desea eliminar a @u.Nombre_de_usuario?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancelar</button>
-                                        <a class="btn  btn-outline-danger" asp-controller="Usuario"
-                                            asp-action="EliminarUsuario" asp-route-id="@u.Id">Confirmar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table> *@
 </div>
+@if (TempData["AlertMessage"] != null)
+{
+    <script>
+        alert("@TempData["AlertMessage"]");
+    </script>
+}

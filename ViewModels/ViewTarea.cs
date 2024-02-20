@@ -11,4 +11,5 @@ public class ViewTarea{
     public string Imagen {get; set;}
     public string Tablero {get; set;}
     public int Id_tablero {get; set;}
+    public int Propietario_tablero {get; set;}
 }

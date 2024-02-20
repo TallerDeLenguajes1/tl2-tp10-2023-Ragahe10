@@ -48,6 +48,22 @@ public class UsuarioRepository : IUsuarioRepository {
         }
         return usuario;
     }
+    public int GetCountUsuarioAdmin(){
+        var query = @"SELECT COUNT(id) as cant_admin FROM Usuario WHERE rol = @rol;";
+        int cantAdmin = 0;
+        using (SQLiteConnection connection = new SQLiteConnection(CadenaDeConexion)){
+            var command = new SQLiteCommand(query, connection);
+            command.Parameters.Add(new SQLiteParameter("@rol","Administrador"));
+            connection.Open();
+            using(SQLiteDataReader reader = command.ExecuteReader()){
+                while(reader.Read()){
+                   cantAdmin = Convert.ToInt32(reader["cant_admin"]);
+                }
+            }
+            connection.Close();
+        }
+        return cantAdmin;
+    }
     public Usuario GetUsuarioLogin(ViewUsuarioLogin user){
         var query = @"SELECT * FROM Usuario WHERE nombre_de_usuario = @nombre_de_usuario AND pass = @pass;";
         Usuario usuario = null;

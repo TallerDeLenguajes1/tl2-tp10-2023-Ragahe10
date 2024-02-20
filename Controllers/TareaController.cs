@@ -139,6 +139,10 @@ public class TareaController : Controller
         }
         return false;
     }
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
     private bool esPropietario(int id){
         var tarea = _tareaRepository.GetTarea(id);
         if(tarea != null && tarea.Id_usuario_asignado == HttpContext.Session.GetInt32("Id")){
