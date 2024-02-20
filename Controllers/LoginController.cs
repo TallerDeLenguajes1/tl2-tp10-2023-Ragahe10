@@ -19,7 +19,7 @@ public class LoginController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        return View(new ViewUsuarioLogin());
     }
 
     public IActionResult LogIn(ViewUsuarioLogin user){
@@ -30,10 +30,12 @@ public class LoginController : Controller
                     LogInUser(usuario);
                     _logger.LogInformation("INICIO DE SESION -Usuario: "+usuario.Nombre_de_usuario);
                     return RedirectToRoute(new{controller = "Home" , action = "Index"});
+                }else{
+                    ModelState.AddModelError(nameof(ViewUsuarioLogin.Name), "El usuario y/o contraseña son incorrectos");
                 }
                 _logger.LogWarning("ACCESO INVALIDO -Usuario: "+user.Name+" -Contraseña: "+user.Pass);
             }
-            return RedirectToAction("Index");
+            return View("Index",user);
         } catch (Exception ex) {
             _logger.LogError(ex.ToString());
             return RedirectToAction("Error");

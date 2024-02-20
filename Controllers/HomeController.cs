@@ -19,7 +19,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        cargaInicial();
+        cargaTableros();
         return View();
     }
 
@@ -33,7 +33,7 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-    private void cargaInicial(){
+    private void cargaTableros(){
         var tableros = _tableroRepository.GetAllTableros();
         List<ViewTableroNav> viewTableroNavs = new List<ViewTableroNav>();
         foreach (var t in tableros)

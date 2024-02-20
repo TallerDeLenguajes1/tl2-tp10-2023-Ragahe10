@@ -3,8 +3,8 @@ using Proyecto.Models;
 using System.ComponentModel.DataAnnotations;
 
 public class ViewUsuarioUpdate{
-    public int Id {get;}
-    public string Nombre_de_usuario {get;}
+    public int Id {get; set;}
+    public string Nombre_de_usuario {get; set;}
 
     public ViewUsuarioUpdate()
     {

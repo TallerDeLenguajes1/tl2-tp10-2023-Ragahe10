@@ -9,11 +9,11 @@
         <legend>@Model.Id - @Model.Nombre_de_usuario</legend>
         <fieldset>
             <div class="mb-3 form-floating">
-                <input hidden asp-for="@Model.Id">
-                <input hidden asp-for="@Model.Nombre_de_usuario">
+                <input hidden asp-for="@Model.Id" value="@Model.Id">
+                <input hidden asp-for="@Model.Nombre_de_usuario" value="@Model.Nombre_de_usuario">
                 <div class="d-flex flex-column align-items-center my-2">
                     <legend>Avatar</legend>
-                    <input asp-for="@Model.Imagen" id="selectedGender" readonly hidden>
+                    <input asp-for="@Model.Imagen" id="selectedGender" required hidden>
                     <div class="d-flex flex-row flew-wrap">
                         <div class="d-flex flex-column m-2">
                             <input type="radio" name="flexRadioDefault" value="sinImagen.png" id="sinImagen" checked>
@@ -76,7 +76,7 @@
     var p4 = document.getElementById('p4');
     var p5 = document.getElementById('p5');
     var selectedGenderInput = document.getElementById('selectedGender');
-
+    selectedGenderInput.value = sinImagen.value;
 
     sinImagen.addEventListener('change', Avatar, false);
     p1.addEventListener('change', Avatar, false);

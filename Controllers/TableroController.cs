@@ -137,6 +137,7 @@ public class TableroController : Controller
             if(isAdmin() || esPropietario(id)){
                 _tableroRepository.DeleteTablero(id);
             }
+            cargaTableros();
             return RedirectToAction("Index");
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
@@ -155,6 +156,16 @@ public class TableroController : Controller
             return true;
         }
         return false;
+    }
+    private void cargaTableros(){
+        var tableros = _tableroRepository.GetAllTableros();
+        List<ViewTableroNav> viewTableroNavs = new List<ViewTableroNav>();
+        foreach (var t in tableros)
+        {
+            var VMTablero = new ViewTableroNav(t);
+            viewTableroNavs.Add(VMTablero);
+        }
+        HttpContext.Session.SetObjectAsJson("Tableros", viewTableroNavs);
     }
     public IActionResult Privacy()
     {

@@ -47,7 +47,10 @@ public class UsuarioController : Controller
                 if (!_usuarioRepository.Existe(usuario.Nombre_de_usuario)){
                     if(user.Pass == user.PassControl){
                         _usuarioRepository.AddUsuario(usuario);
-                        return RedirectToAction("Index");
+                        ViewUsuarioLogin usuarioLogin = new ViewUsuarioLogin();
+                        usuarioLogin.Name = usuario.Nombre_de_usuario;
+                        usuarioLogin.Pass = usuario.Pass;
+                        return RedirectToAction("LogIn","Login",usuarioLogin);
                     }
                     ModelState.AddModelError(nameof(ViewUsuarioAdd.PassControl), "Las contraseñas no son iguales");
                 }else{
@@ -147,9 +150,14 @@ public class UsuarioController : Controller
                     _tableroRepository.DeleteTablero(t.Id);
                 }
                 _usuarioRepository.DeleteUsuario(id);
-                return RedirectToAction("Index");
+                cargaTableros();
+                if(HttpContext.Session.GetInt32("Id") == id){
+                    return RedirectToRoute(new{controller = "Login", action="LogOut"});
+                }else{
+                    return RedirectToAction("Index");
+                }
             }else{
-                return RedirectToRoute(new{controller = "Login", action="LogOut"});
+                return RedirectToRoute(new{controller = "Login", action="Index"});
             }
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
@@ -171,5 +179,15 @@ public class UsuarioController : Controller
             return true;
         }
         return false;
+    }
+    private void cargaTableros(){
+        var tableros = _tableroRepository.GetAllTableros();
+        List<ViewTableroNav> viewTableroNavs = new List<ViewTableroNav>();
+        foreach (var t in tableros)
+        {
+            var VMTablero = new ViewTableroNav(t);
+            viewTableroNavs.Add(VMTablero);
+        }
+        HttpContext.Session.SetObjectAsJson("Tableros", viewTableroNavs);
     }
 }

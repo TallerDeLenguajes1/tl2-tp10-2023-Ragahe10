@@ -10,14 +10,14 @@
             <div class="my-3">
                 <label asp-for="@Model.Name" class="form-label">Usuario</label>
                 <input type="text" asp-for="@Model.Name" class="form-control" placeholder="ElMejorUsuario29">
-                <span asp-validation-for="@Model.Name" class="text-danger"></span> 
             </div>
             <div class="my-3">
                 <label asp-for="@Model.Pass">Contraseña</label>
                 <input type="password" asp-for="@Model.Pass" class="form-control" placeholder="Contraseña">
-                <span asp-validation-for="@Model.Pass" class="text-danger"></span>
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
             <button type="submit" class="btn my-4 w-50 fs-5 btn-outline-success">Enviar</button>
         </fieldset>
     </form>
 </div>
+@section Scripts{<partial name="_ValidationScriptsPartial"/>}
