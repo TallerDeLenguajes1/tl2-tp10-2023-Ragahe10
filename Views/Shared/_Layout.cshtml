@@ -56,13 +56,15 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <img class="rounded-circle" src="~/img/@Context.Session.GetString("Imagen")" alt="logo"
                                         width="30px" height="30px">
-                                    <p class="text-white m-2">@Context.Session.GetString("User")</p>
+                                    <p class="text-white m-2 d-flex" style="min-width: 100px;">@Context.Session.GetString("User")</p>
                                 </button>
-                                <ul class="dropdown-menu dropdown-menu-dark">
+                                <ul class="dropdown-menu dropdown-menu-dark w-100">
                                     <li class="dropdown-item">
-                                        <a class="btn btn-outline-danger " asp-controller="Login" asp-action="LogOut"><i class="bi bi-door-closed"></i> Log Out</a>
-                                        <a title="Modificar" class="btn btn-outline-primary" asp-controller="Usuario" asp-action="ModificarUsuario"
-                                        asp-route-id="@Context.Session.GetInt32("Id")"><i class="bi bi-pencil-square"></i></a>
+                                        <a title="Modificar" class="btn btn-outline-primary w-100" asp-controller="Usuario" asp-action="ModificarUsuario"
+                                        asp-route-id="@Context.Session.GetInt32("Id")"><i class="bi bi-pencil-square"></i> Editar</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a class="btn btn-outline-danger w-100" asp-controller="Login" asp-action="LogOut"><i class="bi bi-door-closed"></i> Log Out</a>
                                     </li>
                                 </ul>
                             </div>
@@ -76,7 +78,7 @@
         </nav>
     </header>
     <div id="fondo">
-        <main role="main" class="pb-3 px-5 py-2">
+        <main role="main" class="pb-3 px-3 py-2">
             @RenderBody()
         </main>
     </div>

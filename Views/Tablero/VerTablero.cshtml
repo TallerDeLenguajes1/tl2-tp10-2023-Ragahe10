@@ -50,6 +50,9 @@
                     <a class="btn m-1 btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#exampleModal-@Model.Id">
                         <i class="bi bi-trash"></i> Eliminar
                     </a>
+                    <a class="btn m-1 btn-outline-success w-100" asp-controller="Tarea" asp-action="CrearTarea">
+                        <i class="bi bi-plus-lg"></i> Crear Tarea
+                    </a>
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal-@Model.Id" tabindex="-1" aria-labelledby="exampleModalLabel-@Model.Id"

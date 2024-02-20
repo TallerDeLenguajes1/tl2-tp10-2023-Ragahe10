@@ -29,7 +29,7 @@
                       <p><strong>Tablero:</strong> @t.Tablero<a class="btn btn-outline-primary mx-4" title="Ver Tablero" asp-controller="Tablero" asp-action="VerTablero" asp-route-id="@t.Id_tablero"><i class="bi bi-search"></i></a></p>
                       <p><strong>Estado:</strong> @t.Estado</p>
                       <p><strong>Color:</strong> <img height="30px" width="60px" class="rounded" style="background-color: @t.Color;"></p>
-                      <p><strong>Descripcion:</strong><br>@t.Descripcion</p>
+                      <p class="wrap"><strong>Descripcion:</strong><br>@t.Descripcion</p>
                     </div>
                     <hr>
                     <div class="d-flex flex-wrap flex-row justify-content-end align-items-center">
@@ -94,7 +94,7 @@
                       <p><strong>Tablero:</strong> @t.Tablero<a class="btn btn-outline-primary mx-4" title="Ver Tablero" asp-controller="Tablero" asp-action="VerTablero" asp-route-id="@t.Id_tablero"><i class="bi bi-search"></i></a></p>
                       <p><strong>Estado:</strong> @t.Estado</p>
                       <p><strong>Color:</strong> <img height="30px" width="60px" class="rounded" style="background-color: @t.Color;"></p>
-                      <p><strong>Descripcion:</strong><br>@t.Descripcion</p>
+                      <p class="wrap"><strong>Descripcion:</strong><br>@t.Descripcion</p>
                     </div>
                     <hr>
                     <div class="d-flex flex-wrap flex-row justify-content-end align-items-center">
@@ -138,6 +138,6 @@
         </div>
     </div>
     <div class="text-center">
-      <a class="btn btn-outline-success fs-5 py-2 px-4 mx-auto" asp-area="" asp-controller="Tarea" asp-action="CrearTarea"><i class="bi bi-plus-lg"></i> Crear Tarea</a>
+      <a class="btn btn-outline-success fs-5 py-2 px-4 mx-auto mt-3" asp-area="" asp-controller="Tarea" asp-action="CrearTarea"><i class="bi bi-plus-lg"></i> Crear Tarea</a>
     </div>
 </div>

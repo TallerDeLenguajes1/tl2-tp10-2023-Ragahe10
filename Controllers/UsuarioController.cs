@@ -131,11 +131,11 @@ public class UsuarioController : Controller
     }
     public IActionResult EliminarUsuario(int id){
         try{
-            if(isAdmin() || HttpContext.Session.GetInt32("id") == id){
-                if(isAdmin() && _usuarioRepository.GetCountUsuarioAdmin()==1){
-                    TempData["AlertMessage"] = "No se puede eliminar el unico administrador.";
-                    return RedirectToAction("Index");
-                }
+            if(isAdmin() && _usuarioRepository.GetCountUsuarioAdmin()==1 && HttpContext.Session.GetInt32("Id") == id){
+                TempData["AlertMessage"] = "No se puede eliminar el unico administrador.";
+                return RedirectToAction("Index");
+            }
+            if(isAdmin() || HttpContext.Session.GetInt32("Id") == id){
                 var Tableros = _tableroRepository.GetAllTablerosForUser(id);
                 foreach (var t in Tableros)
                 {
@@ -149,7 +149,7 @@ public class UsuarioController : Controller
                 _usuarioRepository.DeleteUsuario(id);
                 return RedirectToAction("Index");
             }else{
-                return RedirectToRoute(new{controller = "Login", action="Index"});
+                return RedirectToRoute(new{controller = "Login", action="LogOut"});
             }
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
