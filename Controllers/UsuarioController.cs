@@ -11,12 +11,14 @@ public class UsuarioController : Controller
     private readonly ILogger<UsuarioController> _logger;
     private IUsuarioRepository _usuarioRepository;
     private ITableroRepository _tableroRepository;
+    private ITareaRepository _tareaRepository;
 
-    public UsuarioController(ILogger<UsuarioController> logger, IUsuarioRepository usuarioRepository, ITableroRepository tableroRepository)
+    public UsuarioController(ILogger<UsuarioController> logger, IUsuarioRepository usuarioRepository, ITableroRepository tableroRepository, ITareaRepository tareaRepository)
     {
         _logger = logger;
         _usuarioRepository = usuarioRepository;
         _tableroRepository = tableroRepository;
+        _tareaRepository = tareaRepository;
     }
 
     public IActionResult Index()
@@ -137,6 +139,11 @@ public class UsuarioController : Controller
                 var Tableros = _tableroRepository.GetAllTablerosForUser(id);
                 foreach (var t in Tableros)
                 {
+                    var tareas = _tareaRepository.GetAllTareasForTablero(t.Id);
+                    foreach (var tarea in tareas)
+                    {
+                        _tareaRepository.DeleteTarea(tarea);
+                    }
                     _tableroRepository.DeleteTablero(t.Id);
                 }
                 _usuarioRepository.DeleteUsuario(id);

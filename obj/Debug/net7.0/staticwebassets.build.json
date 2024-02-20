@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "F2JFaNyVLz67xlCUIl4pdxvOdml4WRIueFpL5c3OkU0=",
+  "Hash": "RAV4Sv9+1KNa93Mr6nFtzgQhErlrWaGA1orwnIF+Gtk=",
   "Source": "Proyecto",
   "BasePath": "_content/Proyecto",
   "Mode": "Default",
@@ -102,12 +102,12 @@
       "OriginalItemSpec": "wwwroot\\img\\fondo.jpg"
     },
     {
-      "Identity": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\img\\fondo2.avif",
+      "Identity": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\img\\fondo1.jpg",
       "SourceId": "Proyecto",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\",
       "BasePath": "_content/Proyecto",
-      "RelativePath": "img/fondo2.avif",
+      "RelativePath": "img/fondo1.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -116,7 +116,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\fondo2.avif"
+      "OriginalItemSpec": "wwwroot\\img\\fondo1.jpg"
     },
     {
       "Identity": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\img\\kanban.jpg",

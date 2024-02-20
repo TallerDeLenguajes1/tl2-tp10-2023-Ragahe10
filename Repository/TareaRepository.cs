@@ -94,7 +94,23 @@ public class TareaRepository : ITareaRepository{
         }
         return tareas;
     }
-    public List<ViewTareaInfo> GetAllTareasForTablero(int id){
+    public List<int> GetAllTareasForTablero(int id){
+        var query = @"SELECT * FROM Tarea WHERE id_tablero = @id_tablero;";
+        var id_tareas = new List<int>();
+        using(SQLiteConnection connection = new SQLiteConnection(CadenaDeConexion)){
+            var command = new SQLiteCommand(query, connection);
+            command.Parameters.Add(new SQLiteParameter("id_tablero",id));
+            connection.Open();
+            using(SQLiteDataReader reader = command.ExecuteReader()){
+                while(reader.Read()){
+                    int id_tarea = Convert.ToInt32(reader["id"]);
+                    id_tareas.Add(id_tarea);
+                }
+            }
+        }
+        return id_tareas;
+    }
+    public List<ViewTareaInfo> GetAllTareasForTableroView(int id){
         var query = @"SELECT t.id, t.nombre, descripcion, color, estado, u.nombre_de_usuario as usuario_asignado, u.imagen FROM Tarea t LEFT JOIN Usuario u ON (t.id_usuario_asignado = u.id) WHERE id_tablero = @id_tablero;";
         List<ViewTareaInfo> tareas = new List<ViewTareaInfo>();
         using (SQLiteConnection connection = new SQLiteConnection(CadenaDeConexion)){

@@ -119,7 +119,7 @@ public class TableroController : Controller
                 if(HttpContext.Session.GetString("Rol") == null){
                     return RedirectToRoute(new{controller = "Login", action = "Index"});
                 }else{
-                    var tareasInfo = _tareaRepository.GetAllTareasForTablero(id);
+                    var tareasInfo = _tareaRepository.GetAllTareasForTableroView(id);
                     var viewTableroVer = new ViewTableroVer(tableroInfo,tareasInfo);
                     return View(viewTableroVer);
                 }
