@@ -6,7 +6,7 @@
 <div class="text-center d-flex flex-column align-items-center">
     <h1 class="text-dark">Modificar Rol de Usuario</h1>
     <form class="my-2 p-4 border border-3 border-dark rounded-2 border-opacity-25" asp-controller="Usuario" asp-action="ModificarUsuarioRol">
-        <legend>@Model.Id - @Model.Nombre_de_usuario</legend>
+        <legend>@Model.Nombre_de_usuario</legend>
         <fieldset>
             <input hidden asp-for="@Model.Id">
             <div class="mb-3 form-floating">
