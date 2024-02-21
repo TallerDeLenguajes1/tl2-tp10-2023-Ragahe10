@@ -19,8 +19,13 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        cargaTableros();
-        return View();
+        try{
+            cargaTableros();
+            return View();
+        }catch (Exception ex) {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
     }
 
     public IActionResult Privacy()

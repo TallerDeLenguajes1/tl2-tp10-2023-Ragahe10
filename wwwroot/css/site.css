@@ -11,6 +11,7 @@ html {
   margin: 0 !important;
   border: 0 !important;
   background-image: url("../img/fondo1.jpg");
+  min-height: 80vh;
   /* background-size: cover;
   background-repeat: no-repeat;
   background-position: center; */
