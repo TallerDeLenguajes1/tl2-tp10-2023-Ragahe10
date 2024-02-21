@@ -122,7 +122,6 @@ public class TareaRepository : ITareaRepository{
                     var tarea = new ViewTareaInfo();
                     tarea.Id = Convert.ToInt32(reader["id"]);
                     tarea.Nombre = reader["nombre"].ToString();
-                    tarea.Imagen = reader["imagen"].ToString();
                     tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
                     if(reader["descripcion"]==DBNull.Value){
                         tarea.Descripcion = "Sin Descripcion";
@@ -133,6 +132,11 @@ public class TareaRepository : ITareaRepository{
                         tarea.Color = "Sin Color";
                     }else{
                         tarea.Color = reader["color"].ToString();
+                    }
+                    if(reader["imagen"]==DBNull.Value){
+                        tarea.Imagen = "sinImagen.png";
+                    }else{
+                        tarea.Imagen = reader["imagen"].ToString();
                     }
                     if(reader["usuario_asignado"]==DBNull.Value){
                         tarea.UsuarioAsignado = "Sin asignar";
@@ -157,7 +161,11 @@ public class TareaRepository : ITareaRepository{
                     var tarea = new ViewTarea();
                     tarea.Id = Convert.ToInt32(reader["id"]);
                     tarea.Nombre = reader["nombre"].ToString();
-                    tarea.Imagen = reader["imagen"].ToString();
+                    if(reader["imagen"]==DBNull.Value){
+                        tarea.Imagen = "sinImagen.png";
+                    }else{
+                        tarea.Imagen = reader["imagen"].ToString();
+                    }
                     tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
                     if(reader["descripcion"]==DBNull.Value){
                         tarea.Descripcion = "Sin Descripcion";

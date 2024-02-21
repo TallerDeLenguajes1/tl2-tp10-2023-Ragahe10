@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Asignar Tarea";    
+}
+@model ViewTareaAsignar;
+
+<div class="text-center d-flex flex-column align-items-center">
+    <h1 class="text-dark">Agregar Tarea</h1>
+    <form class="w-50 my-2 p-4 border border-3 border-dark rounded-2 border-opacity-25" asp-controller="Tarea" asp-action="AsignarTarea" method="post">
+        <fieldset>
+            <input asp-for="@Model.Id" value="@Model.Id" hidden>
+            <input asp-for="@Model.IdTablero" value="@Model.IdTablero" hidden>
+            <legend>@Model.Nombre</legend>
+            <div class="mb-3">
+                <label asp-for="@Model.IdUsuarioAsignado">Usuario Asignado: </label>
+                <select class="form-select" asp-for="@Model.IdUsuarioAsignado">
+                    @foreach(var usuario in Model.Usuarios){
+                        <option value="@usuario.Id">@usuario.Nombre_de_usuario</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn  btn-outline-success">Enviar</button>
+        </fieldset>
+    </form>
+</div>
+@section Scripts{<partial name="_ValidationScriptsPartial"/>}

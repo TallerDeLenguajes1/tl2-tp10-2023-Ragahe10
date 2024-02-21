@@ -28,7 +28,7 @@ public class TareaController : Controller
             if(HttpContext.Session.GetString("Rol")==null){
                 return RedirectToRoute(new{controller = "Login", action = "Index"});
             }else{
-                ViewTareaListado listTareas = new ViewTareaListado(_tareaRepository.GetAllTareasView());
+                ViewTareaListado listTareas = new ViewTareaListado(_tareaRepository.GetAllTareasView(), _usuarioRepository.GetAllUsuarios());
                 return View(listTareas);
             }
         }catch (Exception ex){
@@ -99,7 +99,7 @@ public class TareaController : Controller
     public IActionResult ModificarTarea(int id)
     {
         try{
-            var tarea = _tareaRepository.GetAllTareas().FirstOrDefault(t => t.Id == id);
+            var tarea = _tareaRepository.GetTarea(id);
             if(HttpContext.Session.GetString("Rol")==null){
                 return RedirectToRoute(new{controller = "Login", action = "Index"});
             }
@@ -128,6 +128,44 @@ public class TareaController : Controller
                 return RedirectToAction("Index");
             }
             return RedirectToAction("ModificarTarea",id);
+        }catch (Exception ex){
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+    [HttpGet]
+    public IActionResult AsignarTarea(int idTarea, int idTablero)
+    {
+        try{
+            var tarea = _tareaRepository.GetTarea(idTarea);
+            if(HttpContext.Session.GetString("Rol")==null){
+                return RedirectToRoute(new{controller = "Login", action = "Index"});
+            }
+            if(tarea.Id_tablero == idTablero){
+                var usuarios = _usuarioRepository.GetAllUsuarios();
+                return View(new ViewTareaAsignar(tarea, usuarios));
+            }
+            return RedirectToAction("Index");
+        }catch (Exception ex){
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+    [HttpPost]
+    public IActionResult AsignarTarea(ViewTareaAsignar t)
+    {
+        try{
+            if(ModelState.IsValid){
+                if(HttpContext.Session.GetString("Rol")==null)return RedirectToRoute(new{controller = "Login", action = "Index"});
+                var tarea = _tareaRepository.GetTarea(t.Id);
+                if(tarea.Id == t.Id && tarea.Id_tablero==t.IdTablero){
+                    tarea.Id_usuario_asignado= t.IdUsuarioAsignado;
+                    _tareaRepository.UpdateTarea(tarea.Id,tarea);
+                }
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError(nameof(ViewTareaAsignar.Nombre), "Usuario no valido");
+            return View("AsignarTarea",t);
         }catch (Exception ex){
             _logger.LogError(ex.ToString());
             return RedirectToAction("Error");

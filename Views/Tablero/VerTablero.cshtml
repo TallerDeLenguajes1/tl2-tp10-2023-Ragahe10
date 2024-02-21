@@ -137,6 +137,10 @@
                                                 width="30px" height="30px">
                                             <p class="text-white m-2">@t.UsuarioAsignado</p>
                                         </button>
+                                        @if(Context.Session.GetString("User")==Model.Usuario_propietario && t.UsuarioAsignado == "Sin asignar"){
+                                            <a title="Asignar Usuario" asp-controller="Tarea" asp-action="AsignarTarea" asp-route-idTarea="@t.Id" asp-route-idTablero="@Model.Id" class="btn btn-outline-secondary w-100 d-flex flex-row justify-content-center align-items-center">Asignar Usuario
+                                            </a>
+                                        }
                                     </p>
                                     <p class="wrap"><strong>Descripcion</strong><br>@t.Descripcion</p>
                                 </div>
@@ -207,6 +211,10 @@
                                                 width="30px" height="30px">
                                             <p class="text-white m-2">@t.UsuarioAsignado</p>
                                         </button>
+                                        @if(Context.Session.GetString("User")==Model.Usuario_propietario && t.UsuarioAsignado == "Sin asignar"){
+                                            <a title="Asignar Usuario" asp-controller="Tarea" asp-action="AsignarTarea" asp-route-idTarea="@t.Id" asp-route-idTablero="@Model.Id" class="btn btn-outline-secondary w-100 d-flex flex-row justify-content-center align-items-center">Asignar Usuario
+                                            </a>
+                                        }
                                     </p>
                                     <p class="wrap"><strong>Descripcion</strong><br>@t.Descripcion</p>
                                 </div>
@@ -277,6 +285,10 @@
                                                 width="30px" height="30px">
                                             <p class="text-white m-2">@t.UsuarioAsignado</p>
                                         </button>
+                                        @if(Context.Session.GetString("User")==Model.Usuario_propietario && t.UsuarioAsignado == "Sin asignar"){
+                                            <a title="Asignar Usuario" asp-controller="Tarea" asp-action="AsignarTarea" asp-route-idTarea="@t.Id" asp-route-idTablero="@Model.Id" class="btn btn-outline-secondary w-100 d-flex flex-row justify-content-center align-items-center">Asignar Usuario
+                                            </a>
+                                        }
                                     </p>
                                     <p class="wrap"><strong>Descripcion</strong><br>@t.Descripcion</p>
                                 </div>
@@ -347,6 +359,10 @@
                                                 width="30px" height="30px">
                                             <p class="text-white m-2">@t.UsuarioAsignado</p>
                                         </button>
+                                        @if(Context.Session.GetString("User")==Model.Usuario_propietario && t.UsuarioAsignado == "Sin asignar"){
+                                            <a title="Asignar Usuario" asp-controller="Tarea" asp-action="AsignarTarea" asp-route-idTarea="@t.Id" asp-route-idTablero="@Model.Id" class="btn btn-outline-secondary w-100 d-flex flex-row justify-content-center align-items-center">Asignar Usuario
+                                            </a>
+                                        }
                                     </p>
                                     <p class="wrap"><strong>Descripcion</strong><br>@t.Descripcion</p>
                                 </div>
@@ -417,6 +433,10 @@
                                                 width="30px" height="30px">
                                             <p class="text-white m-2">@t.UsuarioAsignado</p>
                                         </button>
+                                        @if(Context.Session.GetString("User")==Model.Usuario_propietario && t.UsuarioAsignado == "Sin asignar"){
+                                            <a title="Asignar Usuario" asp-controller="Tarea" asp-action="AsignarTarea" asp-route-idTarea="@t.Id" asp-route-idTablero="@Model.Id" class="btn btn-outline-secondary w-100 d-flex flex-row justify-content-center align-items-center">Asignar Usuario
+                                            </a>
+                                        }
                                     </p>
                                     <p class="wrap"><strong>Descripcion</strong><br>@t.Descripcion</p>
                                 </div>

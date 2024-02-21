@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\Proyecto.csproj": {}
+    "c:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\Proyecto.csproj": {}
   },
   "projects": {
-    "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\Proyecto.csproj": {
+    "c:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\Proyecto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\Proyecto.csproj",
+        "projectUniqueName": "c:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\Proyecto.csproj",
         "projectName": "Proyecto",
-        "projectPath": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\Proyecto.csproj",
+        "projectPath": "c:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\Proyecto.csproj",
         "packagesPath": "C:\\Users\\educacion\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\obj\\",
+        "outputPath": "c:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\educacion\\AppData\\Roaming\\NuGet\\NuGet.Config"
