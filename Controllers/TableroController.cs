@@ -50,8 +50,8 @@ public class TableroController : Controller
     public IActionResult CrearTablero(ViewTableroAdd viewTablero)
     {
         try{
+            if(HttpContext.Session.GetString("User") == null)return RedirectToRoute(new{controller = "Login", action = "Index"});
             if(ModelState.IsValid){
-                if(HttpContext.Session.GetString("User") == null)return RedirectToRoute(new{controller = "Login", action = "Index"});
                 var tablero = new Tablero(viewTablero);
                 var usuario = _usuarioRepository.GetUsuario(tablero.Id_usuario_propietario);
                 if(usuario!=null){

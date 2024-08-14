@@ -110,9 +110,10 @@ C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Talle
 C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\scopedcss\bundle\Proyecto.styles.css
 C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\scopedcss\projectbundle\Proyecto.bundle.scp.css
-C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\Proyecto.csproj.CopyComplete
 C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\Proyecto.dll
 C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\refint\Proyecto.dll
 C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\Proyecto.pdb
 C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\Proyecto.genruntimeconfig.cache
 C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\ref\Proyecto.dll
+C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\Proyecto.sourcelink.json
+C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\Proyecto.csproj.Up2Date
