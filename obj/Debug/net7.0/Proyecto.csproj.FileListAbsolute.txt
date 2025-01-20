@@ -117,3 +117,6 @@ C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Talle
 C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\ref\Proyecto.dll
 C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\Proyecto.sourcelink.json
 C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\Proyecto.csproj.Up2Date
+C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\bin\Debug\net7.0\Proyecto.staticwebassets.endpoints.json
+C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\staticwebassets.build.endpoints.json
+C:\Users\educacion\OneDrive\Escritorio\ramiro\PU\2doAño\TallerDeLenguajes\Taller-repo\Taller2\tl2-tp10-2023-Ragahe10\obj\Debug\net7.0\staticwebassets\msbuild.Proyecto.Microsoft.AspNetCore.StaticWebAssetEndpoints.props

@@ -3,7 +3,7 @@
 // Luego: dotnet add package System.Data.SQLite, incluyo librería para base de datos SQLite
 // Creo la carpeta de la base de datos, pego la base de datos ahí
 // Agrego en el .csproj 
-/*<ItemGroup>
+  /*<ItemGroup>
     <None Update="{NombreDeLaCarpeta}\{NombreDeLaBaseDeDatos}.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

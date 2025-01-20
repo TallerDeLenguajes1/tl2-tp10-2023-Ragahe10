@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Proyecto.bundle.scp.css",
-      "PackagePath": "staticwebassets\\Proyecto.bundle.scp.css"
+      "PackagePath": "staticwebassets\\Proyecto.1ge1jgpn5g.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\css\\site.css",
@@ -287,6 +287,10 @@
     {
       "Id": "C:\\Users\\educacion\\OneDrive\\Escritorio\\ramiro\\PU\\2doAño\\TallerDeLenguajes\\Taller-repo\\Taller2\\tl2-tp10-2023-Ragahe10\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.Proyecto.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.Proyecto.Microsoft.AspNetCore.StaticWebAssets.props",
